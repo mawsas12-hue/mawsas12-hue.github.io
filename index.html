@@ -21,6 +21,7 @@
       --radius: 30px;
       --tr: 0.3s ease;
       --maxw: 1200px;
+      --ring: rgba(255, 71, 87, 0.45);
     }
 
     /*----- الأساس -----*/
@@ -303,6 +304,8 @@
     }
 
     .social-circle-link {
+      position: relative;
+      overflow: hidden;
       width: 60px;
       height: 60px;
       border-radius: 50%;
@@ -310,7 +313,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--tr);
+      transition: transform var(--tr), box-shadow var(--tr), border-color var(--tr);
       border: 2px solid var(--c-border);
     }
 
@@ -331,19 +334,22 @@
     }
 
     .social-circle-link:hover {
-      transform: scale(1.1);
+      transform: scale(1.1) translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-color: var(--c-primary);
     }
 
     /*----- زر "Hire me" -----*/
     .hire-btn {
+      position: relative;
+      overflow: hidden;
       display: inline-block;
       padding: 15px 45px;
       border: 2px solid var(--c-primary);
       border-radius: var(--radius);
       color: var(--c-text);
       font-weight: 600;
-      transition: var(--tr);
+      transition: transform var(--tr), box-shadow var(--tr), background var(--tr), color var(--tr);
     }
 
     @media (max-width: 768px) {
@@ -358,6 +364,29 @@
       background: var(--c-primary);
       transform: translateY(-3px);
       box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
+    }
+
+    .hire-btn:focus-visible,
+    .social-circle-link:focus-visible,
+    .theme:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 4px;
+    }
+
+    .btn-ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 600ms linear;
+      background: rgba(255, 255, 255, 0.45);
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
     }
 
     /*----- تفعيل الوضع الداكن -----*/
@@ -382,6 +411,14 @@
 
     .theme:hover {
       background: var(--c-primary-l);
+      transform: translateY(-4px) rotate(-12deg);
+      box-shadow: 0 10px 24px rgba(255, 71, 87, 0.3);
+    }
+
+    .theme:active,
+    .hire-btn:active,
+    .social-circle-link:active {
+      transform: translateY(0) scale(0.97);
     }
   </style>
 </head>
@@ -494,7 +531,26 @@
 
     themeBtn.onclick = () =>
       setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+
+    /*----- Button ripple effect -----*/
+    const rippleButtons = document.querySelectorAll(".hire-btn, .theme, .social-circle-link");
+    rippleButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const ripple = document.createElement("span");
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        ripple.style.width = ripple.style.height = `${diameter}px`;
+        ripple.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+        ripple.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+        ripple.classList.add("btn-ripple");
+
+        const oldRipple = button.querySelector(".btn-ripple");
+        if (oldRipple) oldRipple.remove();
+
+        button.appendChild(ripple);
+      });
+    });
   </script>
 </body>
 </html>
-
