@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丿賱賷賱 亘賷毓 氐賵乇 AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f5c842;
+    --gold-light: #ffe98a;
+    --dark: #0a0a0f;
+    --dark2: #12121c;
+    --dark3: #1a1a2e;
+    --accent: #ff6b35;
+    --accent2: #a855f7;
+    --text: #e8e8f0;
+    --text-muted: #888899;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(245,200,66,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(168,85,247,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(245,200,66,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255,107,53,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+  .hero { text-align: center; padding: 80px 20px 60px; position: relative; }
+
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(245,200,66,0.15), rgba(255,107,53,0.15));
+    border: 1px solid var(--gold);
+    border-radius: 50px;
+    padding: 6px 20px;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    animation: pulse-border 2s ease infinite;
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245,200,66,0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(245,200,66,0); }
+  }
+
+  .hero h1 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, var(--gold) 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
+
+  .stats-row { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 60px; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--gold); font-family: 'Tajawal', sans-serif; display: block; }
+  .stat-label { font-size: 13px; color: var(--text-muted); }
+
+  .section { padding: 60px 0; animation: fadeInUp 0.6s ease both; }
+  .section-title { display: flex; align-items: center; gap: 14px; margin-bottom: 36px; }
+  .section-title .icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .icon-gold { background: linear-gradient(135deg, rgba(245,200,66,0.2), rgba(255,200,0,0.1)); border: 1px solid rgba(245,200,66,0.3); }
+  .section-title h2 { font-family: 'Tajawal', sans-serif; font-size: 1.7rem; font-weight: 800; color: #fff; }
+  .section-subtitle { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
+
+  .prompt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+
+  .prompt-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .prompt-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(245,200,66,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .prompt-card:hover { border-color: rgba(245,200,66,0.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(245,200,66,0.08); }
+  .prompt-card:hover::before { opacity: 1; }
+
+  .prompt-num { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .prompt-num::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .prompt-cat { font-size: 11px; background: rgba(168,85,247,0.15); color: #c084fc; border-radius: 50px; padding: 2px 10px; display: inline-block; margin-bottom: 8px; }
+  .prompt-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .prompt-en { font-size: 12px; color: var(--gold-light); font-family: monospace; direction: ltr; text-align: left; background: rgba(245,200,66,0.05); padding: 6px 10px; border-radius: 8px; border-right: 2px solid var(--gold); margin-bottom: 8px; word-break: break-word; }
+  .prompt-desc { font-size: 12px; color: var(--text-muted); }
+
+  .demand-badge { position: absolute; top: 14px; left: 14px; font-size: 10px; padding: 3px 8px; border-radius: 50px; font-weight: 700; }
+  .demand-high { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+  .demand-med { background: rgba(245,200,66,0.15); color: var(--gold); border: 1px solid rgba(245,200,66,0.3); }
+
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-muted);
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 50px;
+    transition: all 0.2s;
+    margin-top: 6px;
+  }
+
+  .copy-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+  .footer {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="container">
+    <div class="hero-badge">馃敟 丿賱賷賱 丕賱乇亘丨 賲賳 氐賵乇 AI 2025</div>
+    <h1>丕氐賳毓 賵亘賽毓 氐賵乇 AI<br>賵丕乇亘丨 丨鬲賶 500$ 卮賴乇賷賸丕</h1>
+    <p>丿賱賷賱 卮丕賲賱: 兀賮囟賱 丕賱亘乇賵賲亘鬲丕鬲貙 丕賱賲賵丕賯毓 丕賱爻乇賷丞貙 賵胤乇賷賯丞 廿賳鬲丕噩 500 氐賵乇丞 賷賵賲賷賸丕</p>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">30</span><span class="stat-label">亘乇賵賲亘鬲 賲孬亘鬲 丕賱乇亘丨</span></div>
+      <div class="stat"><span class="stat-num">8+</span><span class="stat-label">賲賳氐丞 賱賱亘賷毓</span></div>
+      <div class="stat"><span class="stat-num">500$</span><span class="stat-label">丿禺賱 卮賴乇賷 賲賲賰賳</span></div>
+      <div class="stat"><span class="stat-num">500</span><span class="stat-label">氐賵乇丞 賮賷 丕賱賷賵賲</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <div class="section-title">
+      <div class="icon icon-gold">馃帹</div>
+      <div>
+        <h2>兀賮囟賱 30 Prompt 賱氐賵乇 鬲亘丕毓 賰孬賷乇賸丕</h2>
+        <div class="section-subtitle">亘乇賵賲亘鬲丕鬲 賲噩乇亘丞 賮賷 Midjourney 賵DALL-E 賵Stable Diffusion</div>
+      </div>
+    </div>
+
+    <div class="prompt-grid">
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">01</div><div class="prompt-cat">馃寙 賲丿賳 賲爻鬲賯亘賱賷丞</div><div class="prompt-title">賲丿賷賳丞 爻丕賷亘乇亘丕賳賰 賱賷賱賷丞</div><div class="prompt-en">Futuristic cyberpunk city at night, neon lights reflecting on wet streets, ultra-detailed, cinematic 8K</div><div class="prompt-desc">鬲亘丕毓 賱賱賲胤賵乇賷賳 賵丕賱兀賱毓丕亘 賵丕賱賲噩賱丕鬲 丕賱鬲賯賳賷丞</div><button class="copy-btn" onclick="copyText(this, 'Futuristic cyberpunk city at night, neon lights reflecting on wet streets, ultra-detailed, cinematic 8K')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">02</div><div class="prompt-cat">馃懁 亘賵乇鬲乇賷賴</div><div class="prompt-title">丕賲乇兀丞 亘兀爻賱賵亘 夭賷鬲賷 賮丕禺乇</div><div class="prompt-en">Elegant woman portrait, oil painting style, soft golden hour lighting, painterly texture, museum quality</div><div class="prompt-desc">賲胤賱賵亘丞 噩丿賸丕 賱賱胤亘丕毓丞 賵丕賱丿賷賰賵乇 丕賱賲賳夭賱賷</div><button class="copy-btn" onclick="copyText(this, 'Elegant woman portrait, oil painting style, soft golden hour lighting, painterly texture, museum quality')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">03</div><div class="prompt-cat">馃尶 胤亘賷毓丞</div><div class="prompt-title">睾丕亘丞 爻丨乇賷丞 賲囟賷卅丞</div><div class="prompt-en">Enchanted forest with glowing fireflies, misty atmosphere, ethereal light rays, fantasy art style, 4K</div><div class="prompt-desc">卮丕卅毓丞 賮賷 賲賳鬲噩丕鬲 丕賱兀胤賮丕賱 賵丕賱乇賵丕賷丕鬲</div><button class="copy-btn" onclick="copyText(this, 'Enchanted forest with glowing fireflies, misty atmosphere, ethereal light rays, fantasy art style, 4K')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">04</div><div class="prompt-cat">馃彌锔� 賲毓賲丕乇</div><div class="prompt-title">賯氐乇 賷賵賳丕賳賷 賰賱丕爻賷賰賷</div><div class="prompt-en">Ancient Greek marble palace, dramatic sunset, white columns, epic scale, hyper-realistic photography style</div><div class="prompt-desc">賱賱賲丨鬲賵賶 丕賱鬲毓賱賷賲賷 賵丕賱廿毓賱丕賳丕鬲 丕賱爻賷丕丨賷丞</div><button class="copy-btn" onclick="copyText(this, 'Ancient Greek marble palace, dramatic sunset, white columns, epic scale, hyper-realistic photography style')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-med">猸� 賲鬲賵爻胤</span><div class="prompt-num">05</div><div class="prompt-cat">馃悏 賮丕賳鬲丕夭賷丕</div><div class="prompt-title">鬲賳賷賳 兀爻胤賵乇賷</div><div class="prompt-en">Majestic dragon soaring above clouds, iridescent scales, epic fantasy art, dramatic lighting, ultra-detailed wings</div><div class="prompt-desc">鬲購亘丕毓 賰孬賷乇賸丕 賮賷 賲噩鬲賲毓丕鬲 丕賱兀賱毓丕亘</div><button class="copy-btn" onclick="copyText(this, 'Majestic dragon soaring above clouds, iridescent scales, epic fantasy art, dramatic lighting, ultra-detailed wings')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">06</div><div class="prompt-cat">鈽� 賲賳鬲噩丕鬲</div><div class="prompt-title">賲賵賰丕亘 賯賴賵丞 賮丕禺乇丞</div><div class="prompt-en">Luxury coffee cup product shot, marble background, steam rising, professional commercial photography, 8K</div><div class="prompt-desc">賲胤賱賵亘丞 賲賳 丕賱賲賯丕賴賷 賵丕賱毓賱丕賲丕鬲 丕賱鬲噩丕乇賷丞</div><button class="copy-btn" onclick="copyText(this, 'Luxury coffee cup product shot, marble background, steam rising, professional commercial photography, 8K')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">07</div><div class="prompt-cat">馃寠 賲賳丕馗乇</div><div class="prompt-title">卮丕胤卅 賲丕賱丿賷賮賷 爻丨乇賷</div><div class="prompt-en">Pristine Maldives beach, crystal turquoise water, overwater bungalow, golden sunset, drone aerial view, 8K</div><div class="prompt-desc">囟禺賲丞 丕賱胤賱亘 賲賳 賵賰丕賱丕鬲 丕賱爻賷丕丨丞</div><button class="copy-btn" onclick="copyText(this, 'Pristine Maldives beach, crystal turquoise water, overwater bungalow, golden sunset, drone aerial view, 8K')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">08</div><div class="prompt-cat">馃 鬲賯賳賷丞</div><div class="prompt-title">乇賵亘賵鬲 賲爻鬲賯亘賱賷 賵丿賵丿</div><div class="prompt-en">Friendly humanoid robot, soft studio lighting, clean white background, commercial product style, Pixar-quality</div><div class="prompt-desc">賱賱卮乇賰丕鬲 丕賱鬲賯賳賷丞 賵丕賱賲丿賵賳丕鬲</div><button class="copy-btn" onclick="copyText(this, 'Friendly humanoid robot, soft studio lighting, clean white background, commercial product style, Pixar-quality')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">09</div><div class="prompt-cat">馃崟 胤毓丕賲</div><div class="prompt-title">亘賷鬲夭丕 亘鬲氐賵賷乇 丕丨鬲乇丕賮賷</div><div class="prompt-en">Delicious gourmet pizza, cheese pull, rustic wooden table, professional food photography, warm lighting, 4K</div><div class="prompt-desc">囟禺賲丞 丕賱胤賱亘 賲賳 丕賱賲胤丕毓賲 賵丕賱賲胤丕亘禺</div><button class="copy-btn" onclick="copyText(this, 'Delicious gourmet pizza, cheese pull, rustic wooden table, professional food photography, warm lighting, 4K')">馃搵 賳爻禺</button></div>
+      <div class="prompt-card"><span class="demand-badge demand-high">馃敟 賲乇鬲賮毓</span><div class="prompt-num">10</div><div class="prompt-cat">馃 氐丨丞</div><div class="prompt-title">賷賵睾丕 賮賷 丕賱胤亘賷毓丞</div><div class="prompt-en">Woman doing yoga on mountain peak, sunrise golden light, serene misty landscape, wellness lifestyle photography</div><div class="prompt-desc">賲胤賱賵亘丞 賲賳 鬲胤亘賷賯丕鬲 丕賱氐丨丞 賵丕賱賱賷丕賯丞</div><button class="copy-btn" onclick="copyText(this, 'Woman doing yoga on mountain peak, sunrise golden light, serene misty landscape, wellness lifestyle photography')">馃搵 賳爻禺</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">© 2026 AI Prompt Guide</div>
+
+<script>
+  function copyText(button, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const original = button.textContent;
+      button.textContent = '✅ Copied';
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1200);
+    });
+  }
+</script>
+</body>
+</html>
