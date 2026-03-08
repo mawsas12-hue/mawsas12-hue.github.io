@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دمج Gemini مع أدوات Google للإنتاجية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --gold: #f5c842;
+  --gold-light: #ffe98a;
+  --dark: #0a0a0f;
+  --accent: #ff6b35;
+  --accent2: #a855f7;
+  --text: #e8e8f0;
+  --text-muted: #888899;
+  --card-bg: rgba(255,255,255,0.04);
+  --border: rgba(245,200,66,0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(168,85,247,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(245,200,66,0.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* عنوان رئيسي */
+h1 {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* بطاقة */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(245,200,66,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(245,200,66,0.08);
+}
+
+/* شبكة بطاقات */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* شارة */
+.badge {
+  display: inline-block;
+  border-radius: 50px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-gold {
+  background: rgba(245,200,66,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(245,200,66,0.3);
+}
+
+.badge-green {
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+.badge-purple {
+  background: rgba(168,85,247,0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168,85,247,0.3);
+}
+
+.badge-red {
+  background: rgba(255,107,53,0.15);
+  color: var(--accent);
+  border: 1px solid rgba(255,107,53,0.3);
+}
+
+/* فاصل */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 40px 0;
+}
+
+/* أيقونة قسم */
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.icon-gold {
+  background: rgba(245,200,66,0.15);
+  border: 1px solid rgba(245,200,66,0.3);
+}
+
+.icon-purple {
+  background: rgba(168,85,247,0.15);
+  border: 1px solid rgba(168,85,247,0.3);
+}
+
+.icon-orange {
+  background: rgba(255,107,53,0.15);
+  border: 1px solid rgba(255,107,53,0.3);
+}
+
+/* نص ثانوي */
+.muted {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* أنيميشن */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade {
+  animation: fadeInUp 0.5s ease both;
+}
+  </style>
+</head>
+<body>
+  <nav class="container" style="padding-top:20px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+    <a href="index.html" style="display:flex; align-items:center;"><img src="logo.webp" alt="AI NBEESH" style="height:45px; width:auto; object-fit:contain;"></a>
+    <a href="index.html" style="text-decoration:none; color:#fff; border:1px solid rgba(245,200,66,0.3); border-radius:12px; padding:8px 14px; background:rgba(255,255,255,0.03);">⬅ العودة للرئيسية</a>
+  </nav>
+  <main class="container" style="padding-top:30px; padding-bottom:70px;">
+    <h1 class="fade" style="font-size:2.4rem; margin-bottom:14px;">دمج Gemini مع أدوات Google للإنتاجية</h1>
+    <p>ميزة Gemini الحقيقية تظهر عندما تتعامل معه كطبقة ذكاء فوق أدوات Google التي تستخدمها يوميًا. بدل التنقل بين Gmail وDocs وSheets وCalendar بطريقة يدوية، يمكنك بناء تدفق عمل ذكي يختصر الوقت ويقلل الأخطاء ويجعل المخرجات أكثر اتساقًا. الهدف من هذا الدليل هو شرح سيناريوهات عملية قابلة للتطبيق مباشرة في العمل الفردي أو فرق الشركات الصغيرة والمتوسطة.</p>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin:24px 0 10px;">Gemini + Gmail: إدارة البريد بطريقة استراتيجية</h2>
+    <p>أكبر استنزاف للإنتاجية يحدث في البريد الإلكتروني. الرسائل تتراكم، والردود تتأخر، والمعلومات تضيع بين سلاسل طويلة. باستخدام Gemini تستطيع تلخيص المحادثات الطويلة في نقاط: من طلب ماذا؟ ما الموعد النهائي؟ ما القرار المطلوب؟ ثم توليد ردود مهنية بنبرة مناسبة، سواء كانت رسمية لعميل أو مختصرة لفريق داخلي. عند اعتماد هذا الأسلوب ستنخفض مدة معالجة البريد بشكل واضح خلال أيام قليلة.</p>
+
+    <div class="grid" style="margin-top:16px;">
+      <div class="card"><span class="badge badge-gold">Gmail</span><h3 style="margin:8px 0;">تلخيص سلاسل الرسائل</h3><p>اطلب تلخيصًا من 5 نقاط مع تحديد المرسل الرئيسي والموعد النهائي والعوائق. هذا يساعدك على اتخاذ قرار سريع دون إعادة قراءة كل الرسائل.</p></div>
+      <div class="card"><span class="badge badge-purple">Gmail</span><h3 style="margin:8px 0;">صياغة ردود مخصصة</h3><p>اكتب تعليمات بالنبرة المطلوبة، واطلب نسختين: مختصرة ومفصلة. بهذه الطريقة تحافظ على السرعة دون التضحية بالاحترافية.</p></div>
+      <div class="card"><span class="badge badge-green">Gmail</span><h3 style="margin:8px 0;">استخراج مهام</h3><p>اطلب تحويل الرسائل إلى قائمة مهام مع أولويات. ثم انقلها إلى أداة تنفيذ مثل Keep أو جدول متابعة في Sheets.</p></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin-bottom:10px;">Gemini + Docs: من الفكرة إلى وثيقة جاهزة</h2>
+    <p>عند كتابة وثائق العمل، يضيع الوقت غالبًا بين البداية المترددة والتعديل المتكرر. هنا يقدّم Gemini قيمة كبيرة: يبدأ معك من مخطط المحتوى، ثم يساعد في كتابة المسودات، ثم ينقّح النص لغويًا ومنطقيًا. الأهم أنه يستطيع إعادة صياغة نفس المحتوى لمستويات مختلفة: تقرير للإدارة، دليل تنفيذي للفريق، ونسخة تعريفية للعميل.</p>
+    <p>أفضل ممارسة هي كتابة «وثيقة موجزة» أولًا: الهدف، الجمهور، الرسالة الأساسية، وحدود النطاق. ثم اطلب من Gemini بناء هيكل متماسك. بهذه الطريقة تمنع التشتت، وتضمن أن كل فقرة تخدم هدفًا واضحًا.</p>
+
+    <div class="grid" style="margin-top:16px;">
+      <div class="card"><span class="badge badge-red">Docs</span><h3 style="margin:8px 0;">بناء هيكل الوثيقة</h3><p>اطلب عناوين h2 واضحة مع نقاط لكل قسم. الهيكل الجيد يختصر نصف وقت الكتابة لأنه يمنحك مسارًا منطقيًا للتوسع.</p></div>
+      <div class="card"><span class="badge badge-gold">Docs</span><h3 style="margin:8px 0;">تحسين الأسلوب</h3><p>اطلب إزالة الحشو، وتوضيح الجمل المعقدة، وإضافة أمثلة عربية واقعية. النتيجة تكون أكثر قربًا من القارئ وأكثر إقناعًا.</p></div>
+      <div class="card"><span class="badge badge-purple">Docs</span><h3 style="margin:8px 0;">نسخ متعددة</h3><p>اطلب 3 نسخ من نفس المحتوى: رسمية، تعليمية، وتسويقية. هذا مفيد لنشر المادة عبر قنوات مختلفة دون إعادة كتابة كاملة.</p></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin-bottom:10px;">Gemini + Sheets + Calendar: تشغيل يومك بالأرقام</h2>
+    <p>البيانات وحدها لا تكفي؛ المهم تحويلها إلى قرارات. في Sheets يمكن لـ Gemini شرح الاتجاهات، اكتشاف القيم الشاذة، واقتراح لوحات مؤشرات تساعد الفريق على المتابعة الأسبوعية. بعد ذلك يأتي دور Calendar لتنظيم التنفيذ: تحويل المهام الناتجة من التحليل إلى مواعيد واضحة، مع تذكيرات وقوالب اجتماعات مرتبطة بالأولويات.</p>
+    <p>مثال عملي: لديك جدول مبيعات أسبوعي. اطلب من Gemini تحديد المنتجات الأعلى نموًا والأقل أداءً مع تفسير محتمل. ثم اطلب خطة تحسين لمدة أسبوعين. أخيرًا انقل الخطة إلى Calendar على شكل اجتماعات قصيرة، ومهام متابعة، ومواعيد مراجعة أداء. بهذه الدورة تربط التحليل بالتنفيذ فعليًا.</p>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin:26px 0 10px;">نظام تكاملي بسيط لفريق صغير</h2>
+    <p>ابدأ كل صباح بخمس دقائق في Gmail لتلخيص الرسائل المهمة. بعد ذلك افتح Docs لصياغة وثيقة «أولويات اليوم» بمساعدة Gemini. عند نهاية اليوم، راجع Sheets لاستخراج مؤشرات التقدم، ثم حدّث Calendar تلقائيًا بمواعيد الغد. هذا النظام البسيط يصنع فرقًا واضحًا في التركيز لأن كل أداة تؤدي وظيفة محددة ضمن سلسلة واحدة.</p>
+    <p>الخلاصة أن دمج Gemini مع أدوات Google ليس رفاهية تقنية، بل أسلوب عمل حديث يقلل الوقت الضائع في المهام المتكررة. كلما كانت تعليماتك أدق، كانت النتائج أقرب لاحتياجك. ومع الاستمرارية ستبني قوالب ثابتة ترفع إنتاجيتك الفردية والجماعية بشكل ملموس.</p>
+    <p class="muted" style="margin-top:16px;">مدة القراءة: 8 دقائق • آخر تحديث: مارس 2026</p>
+  </main>
+</body>
+</html>

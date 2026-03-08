@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>من النص إلى الفيديو مقدمة عملية لـ Sora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --gold: #f5c842;
+  --gold-light: #ffe98a;
+  --dark: #0a0a0f;
+  --accent: #ff6b35;
+  --accent2: #a855f7;
+  --text: #e8e8f0;
+  --text-muted: #888899;
+  --card-bg: rgba(255,255,255,0.04);
+  --border: rgba(245,200,66,0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(168,85,247,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(245,200,66,0.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* عنوان رئيسي */
+h1 {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* بطاقة */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(245,200,66,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(245,200,66,0.08);
+}
+
+/* شبكة بطاقات */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* شارة */
+.badge {
+  display: inline-block;
+  border-radius: 50px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-gold {
+  background: rgba(245,200,66,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(245,200,66,0.3);
+}
+
+.badge-green {
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+.badge-purple {
+  background: rgba(168,85,247,0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168,85,247,0.3);
+}
+
+.badge-red {
+  background: rgba(255,107,53,0.15);
+  color: var(--accent);
+  border: 1px solid rgba(255,107,53,0.3);
+}
+
+/* فاصل */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 40px 0;
+}
+
+/* أيقونة قسم */
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.icon-gold {
+  background: rgba(245,200,66,0.15);
+  border: 1px solid rgba(245,200,66,0.3);
+}
+
+.icon-purple {
+  background: rgba(168,85,247,0.15);
+  border: 1px solid rgba(168,85,247,0.3);
+}
+
+.icon-orange {
+  background: rgba(255,107,53,0.15);
+  border: 1px solid rgba(255,107,53,0.3);
+}
+
+/* نص ثانوي */
+.muted {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* أنيميشن */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade {
+  animation: fadeInUp 0.5s ease both;
+}
+  </style>
+</head>
+<body>
+  <nav class="container" style="padding-top:20px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+    <a href="index.html" style="display:flex; align-items:center;"><img src="logo.webp" alt="AI NBEESH" style="height:45px; width:auto; object-fit:contain;"></a>
+    <a href="index.html" style="text-decoration:none; color:#fff; border:1px solid rgba(245,200,66,0.3); border-radius:12px; padding:8px 14px; background:rgba(255,255,255,0.03);">⬅ العودة للرئيسية</a>
+  </nav>
+  <main class="container" style="padding-top:30px; padding-bottom:70px;">
+    <h1 class="fade" style="font-size:2.4rem; margin-bottom:14px;">من النص إلى الفيديو مقدمة عملية لـ Sora</h1>
+    <p>الانتقال من فكرة مكتوبة إلى فيديو مقنع كان سابقًا يحتاج فريقًا كاملًا من كتاب ومصورين ومحررين. اليوم، مع Sora، يمكن لصاحب مشروع أو صانع محتوى تنفيذ نسخة أولية قوية خلال وقت قصير. لكن النجاح لا يعتمد على كتابة جملة عشوائية فقط؛ بل على فهم لغة المشهد، الإيقاع، والزوايا، ثم تحويلها إلى تعليمات دقيقة للنموذج.</p>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin:24px 0 10px;">ابدأ بسيناريو واضح قبل البرومبت</h2>
+    <p>أفضل طريقة لاستخدام Sora هي كتابة سيناريو مختصر من 4 عناصر: الهدف، الشخصية/العنصر الرئيسي، البيئة، والمشاعر المطلوبة. مثال: نريد فيديو يشرح خدمة توصيل سريعة لشباب المدن، بأسلوب حيوي ومتفائل. هذا التحديد يمنع المخرجات العامة ويجعل الفيديو أقرب لحملة تسويقية حقيقية.</p>
+    <p>بعد ذلك، قسّم الفيديو إلى لقطات قصيرة: افتتاحية، شرح الفكرة، إثبات الفائدة، ثم خاتمة بدعوة لاتخاذ إجراء. هذا الهيكل يجعل المونتاج اللاحق أسهل ويزيد وضوح الرسالة.</p>
+
+    <div class="grid" style="margin-top:16px;">
+      <div class="card"><span class="badge badge-gold">الأساس</span><h3 style="margin:8px 0;">الهدف التجاري</h3><p>حدّد لماذا تصنع الفيديو: زيادة الوعي، جمع عملاء محتملين، أو شرح منتج. كل هدف يفرض إيقاعًا بصريًا مختلفًا.</p></div>
+      <div class="card"><span class="badge badge-purple">الأساس</span><h3 style="margin:8px 0;">الجمهور المستهدف</h3><p>لغة المشهد للشباب تختلف عن لغة الشركات. كلما وصفت الجمهور أدق، أصبحت النتيجة أقرب لتوقعاته وسلوكه.</p></div>
+      <div class="card"><span class="badge badge-green">الأساس</span><h3 style="margin:8px 0;">صيغة المنصة</h3><p>فيديو Reels عمودي يختلف عن فيديو يوتيوب أفقي. ضع نسبة الأبعاد من البداية لتفادي قصّ العناصر المهمة لاحقًا.</p></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin-bottom:10px;">كيف تكتب برومبت فيديو فعال؟</h2>
+    <p>البرومبت الجيد في Sora يصف ثلاثة مستويات: ما الذي يحدث؟ كيف يبدو؟ وكيف تتحرك الكاميرا؟ مثلًا: «مشهد شارع صباحي في مدينة عربية حديثة، شاب يستلم طلبًا بسرعة، ألوان دافئة، كاميرا تتبع الحركة بسلاسة، عمق مجال متوسط، مدة 8 ثوان». بهذه الصيغة تجمع بين السرد والشكل السينمائي.</p>
+    <p>أضف أيضًا القيود التي تحافظ على الهوية: تجنب ازدحام المشهد، لا تستخدم نصوصًا عشوائية داخل الفيديو، واحرص على طابع واقعي نظيف. هذه القيود تمنع الأخطاء الشائعة وتقلل عدد المحاولات.</p>
+
+    <div class="grid" style="margin-top:16px;">
+      <div class="card"><span class="badge badge-red">تقني</span><h3 style="margin:8px 0;">حركة الكاميرا</h3><p>اختر حركة واحدة واضحة لكل لقطة: pan أو tracking أو static. كثرة الحركات تربك المشاهد وتضعف الرسالة.</p></div>
+      <div class="card"><span class="badge badge-gold">تقني</span><h3 style="margin:8px 0;">الإضاءة والمزاج</h3><p>حدد mood بصريًا: دافئ، احترافي، درامي، أو مرح. المزاج هو الذي يعطي الفيديو شخصية متسقة من البداية للنهاية.</p></div>
+      <div class="card"><span class="badge badge-purple">تقني</span><h3 style="margin:8px 0;">مدة اللقطة</h3><p>اللقطات القصيرة (5-8 ثوان) مناسبة للإعلانات السريعة. المدة الطويلة قد تفقد الانتباه على المنصات الاجتماعية.</p></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin-bottom:10px;">من توليد الفيديو إلى نشره فعليًا</h2>
+    <p>بعد استخراج اللقطات، تأتي مرحلة مهمة جدًا: المراجعة. افحص التناسق بين اللقطات، جودة الانتقال، ووضوح الرسالة. لا يكفي أن يكون الفيديو جميلًا؛ يجب أن يدفع المشاهد لفعل واضح مثل زيارة الموقع أو تجربة المنتج. أضف طبقة نصية قصيرة وصوتًا مناسبًا، ثم راقب هل الإيقاع يخدم الرسالة أم يشتتها.</p>
+    <p>اختبر نسختين من نفس الفيديو: نسخة مركزة على الفائدة، ونسخة مركزة على القصة. البيانات ستخبرك أي أسلوب يحقق تفاعلًا أعلى. بهذه الطريقة تبني عملية تحسين مستمرة بدل الاعتماد على الحدس فقط.</p>
+
+    <h2 style="font-family:'Tajawal',sans-serif; margin:26px 0 10px;">خريطة بداية سريعة للمبتدئين</h2>
+    <p>ابدأ بأول مشروع بسيط: فيديو 15 ثانية لمنتج واحد. اكتب سيناريو 4 جمل، ثم ولّد 3 لقطات، ثم اجمعها في مونتاج خفيف مع نص دعائي واضح. كرر العملية أسبوعيًا مع تحسين البرومبتات. خلال شهر ستنتقل من التجربة إلى إنتاج فيديوهات عملية تدعم المحتوى التسويقي أو التعليمي.</p>
+    <p>الخلاصة أن Sora أداة قوية جدًا عندما تستخدمها بعقلية صانع محتوى محترف: هدف واضح، مشهد محسوب، اختبار مستمر. بهذه المنهجية تستطيع تحويل النص إلى فيديو مؤثر بسرعة، دون التضحية بالاتساق أو جودة الرسالة.</p>
+    <p class="muted" style="margin-top:16px;">مدة القراءة: 8 دقائق • آخر تحديث: مارس 2026</p>
+  </main>
+</body>
+</html>
