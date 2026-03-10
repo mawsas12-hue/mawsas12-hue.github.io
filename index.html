@@ -108,6 +108,68 @@
       margin: 0 auto 1.6rem;
       font-size: clamp(1rem, 1.6vw, 1.22rem);
     }
+
+    .site-branding {
+      margin-bottom: 1.1rem;
+    }
+    .site-name {
+      font-size: clamp(2.2rem, 7vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: 0.6px;
+      color: #a855f7;
+      text-shadow: 0 0 14px rgba(124, 58, 237, 0.32);
+      display: inline-block;
+      width: max-content;
+      max-width: 100%;
+      min-height: 1.15em;
+      white-space: nowrap;
+      overflow: visible;
+      animation: brandGlow 3.8s ease-in-out infinite alternate;
+      direction: ltr;
+    }
+    .site-name::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 0.95em;
+      background: rgba(167, 139, 250, 0.9);
+      margin-inline-start: 0.18rem;
+      vertical-align: -0.08em;
+      animation: caretBlink 0.8s step-end infinite;
+    }
+    .site-author {
+      margin-top: 0.35rem;
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      font-weight: 700;
+      color: #f59e0b;
+      text-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+      opacity: 0;
+      animation: authorFadeIn 2.6s ease forwards;
+      animation-delay: 0.9s;
+    }
+    .hero-divider {
+      width: min(420px, 72%);
+      height: 1px;
+      margin: 1rem auto 1.3rem;
+      background: linear-gradient(90deg, rgba(168,85,247,0.12), rgba(168,85,247,0.92), rgba(59,130,246,0.92), rgba(59,130,246,0.12));
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
+    }
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .site-name {
+        background: linear-gradient(135deg, #a855f7 20%, #3b82f6 80%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .site-author {
+        background: linear-gradient(135deg, #fde68a 15%, #f59e0b 50%, #fef3c7 85%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
     .hero-actions {
       display: flex;
       justify-content: center;
@@ -223,27 +285,68 @@
       flex-wrap: wrap;
     }
 
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+    .popular-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
     }
-    .category-card {
-      background: var(--card);
+    .popular-nav {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 1rem;
-      text-align: center;
-      transition: 0.25s;
+      background: rgba(255,255,255,0.04);
+      color: #fff;
       cursor: pointer;
+      font-size: 1rem;
     }
-    .category-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(6,182,212,0.6);
-      box-shadow: 0 10px 25px rgba(6,182,212,0.2);
+    .popular-list {
+      display: grid;
+      gap: 0.75rem;
     }
-    .category-card .emoji { font-size: 1.45rem; display: block; margin-bottom: 0.3rem; }
-    .category-card .count { color: var(--muted); font-size: 0.9rem; }
+    .popular-card {
+      background: #f8fafc;
+      color: #111827;
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      border: 1px solid #e5e7eb;
+    }
+    .popular-number {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .popular-number.rank-1 { background: #f97316; }
+    .popular-number.rank-2 { background: #3b82f6; }
+    .popular-number.rank-3 { background: #22c55e; }
+    .popular-number.rank-4,
+    .popular-number.rank-5 { background: #6b7280; }
+    .popular-content h3 {
+      font-size: 1.03rem;
+      margin-bottom: 0.2rem;
+      line-height: 1.5;
+    }
+    .popular-content p {
+      color: #4b5563;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
     .newsletter {
       background: linear-gradient(130deg, rgba(124,58,237,0.28), rgba(6,182,212,0.2));
@@ -286,6 +389,18 @@
       0% { transform: scale(0.92); }
       100% { transform: scale(1); }
     }
+    @keyframes brandGlow {
+      0% { filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.35)); }
+      100% { filter: drop-shadow(0 0 14px rgba(59, 130, 246, 0.42)); }
+    }
+    @keyframes caretBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    @keyframes authorFadeIn {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
 
     footer {
       border-top: 1px solid var(--border);
@@ -324,7 +439,7 @@
 
     @media (max-width: 980px) {
       .featured-card { grid-template-columns: 1fr; }
-      .articles-grid, .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .articles-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 740px) {
@@ -342,7 +457,7 @@
       }
       .nav-links.show { display: flex; }
       .menu-btn { display: inline-block; }
-      .articles-grid, .categories-grid, .stats { grid-template-columns: 1fr; }
+      .articles-grid, .stats { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -354,7 +469,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#">الرئيسية</a></li>
         <li><a href="#articles">المقالات</a></li>
-        <li><a href="#categories">التصنيفات</a></li>
+        <li><a href="#popular">الأكثر قراءة</a></li>
         <li><a href="#about">عن الموقع</a></li>
       </ul>
       <div class="nav-icons">
@@ -366,6 +481,11 @@
 
   <main>
     <section class="hero container reveal">
+      <div class="site-branding">
+        <h2 class="site-name" id="siteName" data-text="AI Nbeesh">AI Nbeesh</h2>
+        <div class="site-author">مروان بلوقيد</div>
+      </div>
+      <div class="hero-divider"></div>
       <h1>اكتشف عالم الذكاء الاصطناعي</h1>
       <p>مدونة عربية تساعدك على فهم أدوات الذكاء الاصطناعي الحديثة وتطبيقها عمليًا في الكتابة، البرمجة، التصميم، وصناعة المحتوى.</p>
       <div class="hero-actions">
@@ -385,12 +505,12 @@
         <p>أفضل ما نُشر هذا الأسبوع</p>
       </div>
       <article class="featured-card">
-        <img src="https://source.unsplash.com/800x400/?artificial-intelligence,technology" alt="صورة المقال" class="featured-image" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        <img src="https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&auto=format&fit=crop&q=80" alt="صورة المقال" class="featured-image" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
         <div class="featured-content">
           <span class="tag">أدوات AI</span>
           <h3>دليل شامل لاستخدام ChatGPT وClaude في إنتاج محتوى احترافي</h3>
           <p>تعرف على طرق عملية لبناء برومبتات فعالة، تسريع سير العمل، وتحويل الأفكار إلى مقالات ومنشورات جاهزة للنشر بجودة عالية.</p>
-          <a href="#" class="btn btn-primary">اقرأ المزيد</a>
+          <a href="featured-article.html" class="btn btn-primary">اقرأ المزيد</a>
         </div>
       </article>
     </section>
@@ -403,7 +523,7 @@
       <div class="articles-grid">
         <!-- ChatGPT -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='chatgpt-prompts.html'">
-          <img src="https://source.unsplash.com/800x400/?chatgpt,artificial-intelligence" alt="ChatGPT" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80" alt="ChatGPT" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">ChatGPT</span>
           <h3>10 برومبتات ترفع جودة الكتابة بالعربية</h3>
           <p>قائمة مختصرة لبناء نصوص تسويقية وتعليمية باحترافية وسرعة.</p>
@@ -411,7 +531,7 @@
         </article>
         <!-- Claude -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='claude-files.html'">
-          <img src="https://source.unsplash.com/800x400/?documents,analysis" alt="Claude" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Claude" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Claude</span>
           <h3>تحليل ملفات طويلة بدون ضياع السياق</h3>
           <p>كيف تستخدم Claude لتلخيص المستندات واستخراج النقاط الحرجة.</p>
@@ -419,7 +539,7 @@
         </article>
         <!-- Gemini -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='gemini-google.html'">
-          <img src="https://source.unsplash.com/800x400/?productivity,workspace" alt="Gemini" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80" alt="Gemini" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Gemini</span>
           <h3>دمج Gemini مع أدوات Google للإنتاجية</h3>
           <p>اكتشف أفضل سيناريوهات العمل بين Gmail وDocs وSheets.</p>
@@ -427,7 +547,7 @@
         </article>
         <!-- Midjourney -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='midjourney-design.html'">
-          <img src="https://source.unsplash.com/800x400/?design,creative" alt="Midjourney" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=800&q=80" alt="Midjourney" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Midjourney</span>
           <h3>تصميم صور تسويقية جذابة خلال دقائق</h3>
           <p>خطوات عملية لصياغة برومبتات متوازنة بين الإبداع والدقة.</p>
@@ -435,7 +555,7 @@
         </article>
         <!-- Copilot -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='copilot-code.html'">
-          <img src="https://source.unsplash.com/800x400/?coding,programming" alt="Copilot" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Copilot" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Copilot</span>
           <h3>تسريع كتابة الكود مع الحفاظ على الجودة</h3>
           <p>نصائح للمطورين للاستفادة من الاقتراحات الذكية بكفاءة أعلى.</p>
@@ -443,7 +563,7 @@
         </article>
         <!-- Sora -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='sora-video.html'">
-          <img src="https://source.unsplash.com/800x400/?video,production" alt="Sora" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=800&q=80" alt="Sora" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Sora</span>
           <h3>من النص إلى الفيديو: مقدمة عملية لـ Sora</h3>
           <p>تعلم المبادئ الأساسية لإنتاج فيديوهات قصيرة جذابة بالذكاء الاصطناعي.</p>
@@ -452,18 +572,50 @@
       </div>
     </section>
 
-    <section class="section container reveal" id="categories">
+    <section class="section container reveal" id="popular">
       <div class="section-title">
-        <h2>التصنيفات</h2>
-        <p>اختر الأداة التي تريد التعمق فيها</p>
+        <h2>الأكثر قراءة</h2>
+        <div class="popular-header-actions">
+          <button class="popular-nav" aria-label="السابق">→</button>
+          <button class="popular-nav" aria-label="التالي">←</button>
+        </div>
       </div>
-      <div class="categories-grid">
-        <div class="category-card"><span class="emoji">🤖</span><h3>ChatGPT</h3><div class="count">12 مقالة</div></div>
-        <div class="category-card"><span class="emoji">🧠</span><h3>Claude</h3><div class="count">9 مقالات</div></div>
-        <div class="category-card"><span class="emoji">✨</span><h3>Gemini</h3><div class="count">8 مقالات</div></div>
-        <div class="category-card"><span class="emoji">🎨</span><h3>Midjourney</h3><div class="count">11 مقالة</div></div>
-        <div class="category-card"><span class="emoji">💻</span><h3>Copilot</h3><div class="count">7 مقالات</div></div>
-        <div class="category-card"><span class="emoji">🎬</span><h3>Sora</h3><div class="count">6 مقالات</div></div>
+      <div class="popular-list">
+        <article class="popular-card">
+          <span class="popular-number rank-1">1</span>
+          <div class="popular-content">
+            <h3>10 برومبتات ترفع جودة الكتابة بالعربية</h3>
+            <p>دليل سريع لأقوى القوالب التي تساعدك على إنتاج نصوص احترافية ومقنعة بمجهود أقل وجودة أعلى.</p>
+          </div>
+        </article>
+        <article class="popular-card">
+          <span class="popular-number rank-2">2</span>
+          <div class="popular-content">
+            <h3>تحليل ملفات طويلة بدون ضياع السياق</h3>
+            <p>خطوات عملية لاستخدام Claude في قراءة المستندات الكبيرة واستخراج أهم القرارات والنقاط الحرجة بدقة.</p>
+          </div>
+        </article>
+        <article class="popular-card">
+          <span class="popular-number rank-3">3</span>
+          <div class="popular-content">
+            <h3>دمج Gemini مع أدوات Google للإنتاجية</h3>
+            <p>تعرّف على أفضل سيناريوهات الربط بين Gmail وDocs وSheets لتوفير الوقت ورفع كفاءة العمل اليومي.</p>
+          </div>
+        </article>
+        <article class="popular-card">
+          <span class="popular-number rank-4">4</span>
+          <div class="popular-content">
+            <h3>تصميم صور تسويقية جذابة خلال دقائق</h3>
+            <p>أساليب ذكية لصياغة برومبتات Midjourney تمنحك نتائج بصرية واضحة ومتوازنة تناسب الحملات التسويقية.</p>
+          </div>
+        </article>
+        <article class="popular-card">
+          <span class="popular-number rank-5">5</span>
+          <div class="popular-content">
+            <h3>من النص إلى الفيديو: مقدمة عملية لـ Sora</h3>
+            <p>تعرف على المبادئ الأساسية لتحويل الأفكار المكتوبة إلى فيديوهات قصيرة مؤثرة باستخدام أدوات الذكاء الاصطناعي.</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -493,10 +645,10 @@
         <a href="#">الأكثر قراءة</a>
       </div>
       <div class="footer-col">
-        <h4>التصنيفات</h4>
-        <a href="#categories">ChatGPT</a>
-        <a href="#categories">Midjourney</a>
-        <a href="#categories">Sora</a>
+        <h4>الأكثر قراءة</h4>
+        <a href="#popular">أفضل المقالات</a>
+        <a href="#popular">المحتوى الشائع</a>
+        <a href="#popular">ترتيب الأسبوع</a>
       </div>
       <div class="footer-col">
         <h4>تواصل معنا</h4>
@@ -514,6 +666,7 @@
     const navLinks = document.getElementById('navLinks');
     const newsletterForm = document.getElementById('newsletterForm');
     const successMsg = document.getElementById('successMsg');
+    const siteName = document.getElementById('siteName');
 
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 8);
@@ -522,6 +675,23 @@
     menuBtn?.addEventListener('click', () => {
       navLinks.classList.toggle('show');
     });
+
+    const runSiteNameTyping = () => {
+      if (!siteName) return;
+      const text = siteName.dataset.text || 'AI Nbeesh';
+      siteName.textContent = '';
+      let idx = 0;
+      const typing = setInterval(() => {
+        siteName.textContent = text.slice(0, idx + 1);
+        idx += 1;
+        if (idx >= text.length) {
+          siteName.textContent = text;
+          clearInterval(typing);
+        }
+      }, 120);
+    };
+
+    runSiteNameTyping();
 
     newsletterForm.addEventListener('submit', (e) => {
       e.preventDefault();
