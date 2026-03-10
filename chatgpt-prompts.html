@@ -4,246 +4,505 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>10 برومبتات ترفع جودة الكتابة بالعربية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <style>
-:root {
-  --gold: #f5c842;
-  --gold-light: #ffe98a;
-  --dark: #0a0a0f;
-  --accent: #ff6b35;
-  --accent2: #a855f7;
-  --text: #e8e8f0;
-  --text-muted: #888899;
-  --card-bg: rgba(255,255,255,0.04);
-  --border: rgba(245,200,66,0.15);
-}
+    :root {
+      --cream: #f7f3ec;
+      --warm-white: #faf8f4;
+      --ink: #1a1612;
+      --ink-soft: #3d3530;
+      --ink-muted: #8a7e74;
+      --sand: #e8dfd0;
+      --terracotta: #c4623a;
+      --terracotta-light: #e8855f;
+      --sage: #6b8c6e;
+      --gold: #b8892a;
+      --gold-light: #d4a94a;
+      --border-soft: rgba(180,155,120,0.25);
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-  font-family: 'Cairo', sans-serif;
-  background: var(--dark);
-  color: var(--text);
-  line-height: 1.7;
-}
+    html { scroll-behavior: smooth; }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(168,85,247,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(245,200,66,0.07) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--warm-white);
+      color: var(--ink);
+      line-height: 1.9;
+      font-size: 16px;
+    }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1;
-}
+    /* grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
 
-/* عنوان رئيسي */
-h1 {
-  font-family: 'Tajawal', sans-serif;
-  font-weight: 900;
-  background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+    /* ────── HEADER ────── */
+    .site-header {
+      background: var(--ink);
+      padding: 14px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--terracotta);
+    }
 
-/* بطاقة */
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 22px;
-  transition: all 0.3s;
-}
+    .site-header span {
+      font-family: 'Cairo', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--sand);
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
 
-.card:hover {
-  border-color: rgba(245,200,66,0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(245,200,66,0.08);
-}
+    /* ────── HERO ────── */
+    .hero {
+      background: var(--ink);
+      padding: 80px 24px 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* شبكة بطاقات */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-}
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 60px;
+      background: var(--warm-white);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
 
-/* شارة */
-.badge {
-  display: inline-block;
-  border-radius: 50px;
-  padding: 3px 12px;
-  font-size: 11px;
-  font-weight: 700;
-}
+    .hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--terracotta-light);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding: 6px 18px;
+      border: 1px solid rgba(196,98,58,0.4);
+      border-radius: 40px;
+    }
 
-.badge-gold {
-  background: rgba(245,200,66,0.15);
-  color: var(--gold);
-  border: 1px solid rgba(245,200,66,0.3);
-}
+    .hero h1 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.4;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
 
-.badge-green {
-  background: rgba(34,197,94,0.15);
-  color: #4ade80;
-  border: 1px solid rgba(34,197,94,0.3);
-}
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
 
-.badge-purple {
-  background: rgba(168,85,247,0.15);
-  color: #c084fc;
-  border: 1px solid rgba(168,85,247,0.3);
-}
+    .hero-sub {
+      font-size: 15px;
+      color: var(--ink-muted);
+      max-width: 500px;
+      margin: 0 auto;
+      color: rgba(232,223,208,0.55);
+    }
 
-.badge-red {
-  background: rgba(255,107,53,0.15);
-  color: var(--accent);
-  border: 1px solid rgba(255,107,53,0.3);
-}
+    .hero-line {
+      width: 60px;
+      height: 2px;
+      background: var(--terracotta);
+      margin: 28px auto 0;
+    }
 
-/* فاصل */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 40px 0;
-}
+    /* ────── LAYOUT ────── */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 64px 24px 100px;
+    }
 
-/* أيقونة قسم */
-.icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
+    /* ────── INTRO BLOCK ────── */
+    .intro-block {
+      margin-bottom: 64px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 0.7s ease 0.1s forwards;
+    }
 
-.icon-gold {
-  background: rgba(245,200,66,0.15);
-  border: 1px solid rgba(245,200,66,0.3);
-}
+    .intro-block p {
+      font-size: 16.5px;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
 
-.icon-purple {
-  background: rgba(168,85,247,0.15);
-  border: 1px solid rgba(168,85,247,0.3);
-}
+    .intro-block p:first-child::first-letter {
+      font-family: 'Amiri', serif;
+      font-size: 3.2em;
+      float: right;
+      line-height: 0.8;
+      margin-left: 10px;
+      margin-top: 6px;
+      color: var(--terracotta);
+    }
 
-.icon-orange {
-  background: rgba(255,107,53,0.15);
-  border: 1px solid rgba(255,107,53,0.3);
-}
+    /* ────── SECTION ────── */
+    .section {
+      margin-bottom: 64px;
+      opacity: 0;
+      transform: translateY(18px);
+    }
 
-/* نص ثانوي */
-.muted {
-  color: var(--text-muted);
-  font-size: 13px;
-}
+    .section.visible {
+      animation: rise 0.6s ease forwards;
+    }
 
-/* أنيميشن */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-soft);
+    }
 
-.fade {
-  animation: fadeInUp 0.5s ease both;
-}
+    .section-num {
+      font-family: 'Amiri', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      line-height: 1;
+      min-width: 36px;
+    }
+
+    .section-head h2 {
+      font-family: 'Amiri', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .section p {
+      font-size: 16px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    /* ────── DIVIDER ────── */
+    .ornament {
+      text-align: center;
+      margin: 48px 0;
+      color: var(--sand);
+      font-size: 22px;
+      letter-spacing: 14px;
+      opacity: 0.8;
+    }
+
+    /* ────── KEY POINTS ────── */
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border-soft);
+      border: 1px solid var(--border-soft);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 64px;
+    }
+
+    .key-card {
+      background: var(--warm-white);
+      padding: 28px 22px;
+      transition: background 0.25s;
+    }
+
+    .key-card:hover {
+      background: var(--cream);
+    }
+
+    .key-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .key-tag.t-terracotta { color: var(--terracotta); }
+    .key-tag.t-sage { color: var(--sage); }
+    .key-tag.t-gold { color: var(--gold); }
+
+    .key-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .key-card p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ────── STEPS ────── */
+    .steps-title {
+      font-family: 'Amiri', serif;
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .steps-list {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 15.5px;
+      color: var(--ink-soft);
+      font-weight: 300;
+      opacity: 0;
+      transform: translateX(12px);
+    }
+
+    .steps-list li.visible {
+      animation: slideIn 0.45s ease forwards;
+    }
+
+    .steps-list li::before {
+      content: counter(steps, decimal-leading-zero);
+      font-family: 'Amiri', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      min-width: 30px;
+      padding-top: 2px;
+    }
+
+    /* ────── CLOSING ────── */
+    .closing {
+      background: var(--ink);
+      border-radius: 8px;
+      padding: 48px 40px;
+      margin-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .closing::before {
+      content: '«';
+      position: absolute;
+      font-family: 'Amiri', serif;
+      font-size: 18rem;
+      color: rgba(255,255,255,0.025);
+      top: -60px;
+      right: -20px;
+      line-height: 1;
+    }
+
+    .closing p {
+      font-size: 16px;
+      color: rgba(232,223,208,0.7);
+      margin-bottom: 18px;
+      font-weight: 300;
+      position: relative;
+    }
+
+    .closing p:last-child { margin-bottom: 0; }
+
+    .closing-highlight {
+      font-family: 'Amiri', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--gold-light) !important;
+      border-right: 2px solid var(--terracotta);
+      padding-right: 16px;
+    }
+
+    /* ────── FOOTER ────── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--border-soft);
+      letter-spacing: 0.05em;
+    }
+
+    /* ────── ANIMATIONS ────── */
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ────── RESPONSIVE ────── */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px 55px; }
+      .page-wrap { padding: 48px 18px 80px; }
+      .closing { padding: 36px 24px; }
+    }
   </style>
 </head>
 <body>
-  <main class="container">
-    <section class="hero fade">
-      <span class="hero-badge">دليل عملي متقدم</span>
-      <h1>10 برومبتات ترفع جودة الكتابة بالعربية</h1>
-      <p class="muted">دليل شامل يشرح منهجًا عمليًا لتطبيق موضوع: 10 برومبتات ترفع جودة الكتابة بالعربية بطريقة واضحة قابلة للتنفيذ في الواقع.</p>
-    </section>
 
-    <div class="divider"></div>
+  <header class="site-header">
+    <span>دليل عملي متقدم &nbsp;·&nbsp; الكتابة بالعربية</span>
+  </header>
 
-    <section class="fade">
-      <div class="card">
-        <p>يمثل موضوع «10 برومبتات ترفع جودة الكتابة بالعربية» فرصة حقيقية لكل شخص يريد الانتقال من الاستهلاك إلى الإنتاج. الفكرة الجوهرية هنا أن النتائج القوية لا تأتي من معرفة سطحية أو خطوات عشوائية، بل من فهم عميق للأساسيات، ثم تطبيق منظم ومستمر. عندما تنظر إلى هذا المجال بعقلية مشروع طويل المدى، ستكتشف أن التحسن يتراكم بمرور الوقت، وأن كل تجربة تمنحك خبرة عملية تقرّبك من مستوى أعلى في الجودة والتأثير.</p>
-        <p>الخطأ الشائع أن يبدأ الناس بحماس كبير ثم يتوقفون عند أول تحدٍ. في الحقيقة، أي مسار مرتبط بـ «10 برومبتات ترفع جودة الكتابة بالعربية» يمر بمراحل تعلم طبيعية: مرحلة الاكتشاف، ثم التجربة، ثم بناء أسلوب خاص. المهم هو أن تحوّل الهدف الكبير إلى خطوات صغيرة يمكن قياسها. بهذه الطريقة لن تبقى الفكرة مجرد نية، بل تتحول إلى تقدم ملموس يظهر في جودة العمل، وسرعة الإنجاز، وثقة أكبر عند اتخاذ القرار.</p>
-        <p>لكي تستفيد بشكل فعلي، تحتاج إلى مزيج من ثلاثة عناصر: المعرفة الصحيحة، والأدوات المناسبة، والانضباط في التنفيذ. المعرفة تساعدك على اختيار الاتجاه، والأدوات تختصر الوقت، والانضباط يحافظ على الاستمرارية. وعند الجمع بين هذه العناصر ضمن خطة واضحة، يصبح موضوع «10 برومبتات ترفع جودة الكتابة بالعربية» مسارًا عمليًا يفتح أمامك فرصًا مهنية وإبداعية أكبر بكثير مما تتوقع.</p>
+  <section class="hero">
+    <p class="hero-label">10 برومبتات</p>
+    <h1>ترفع جودة <em>الكتابة</em> بالعربية</h1>
+    <p class="hero-sub">دليل شامل يشرح منهجًا عمليًا لتطبيق هذه البرومبتات بطريقة واضحة قابلة للتنفيذ في الواقع</p>
+    <div class="hero-line"></div>
+  </section>
+
+  <main class="page-wrap">
+
+    <!-- مقدمة -->
+    <div class="intro-block">
+      <p>يمثل هذا الدليل فرصة حقيقية لكل شخص يريد الانتقال من الاستهلاك إلى الإنتاج. الفكرة الجوهرية أن النتائج القوية لا تأتي من معرفة سطحية أو خطوات عشوائية، بل من فهم عميق للأساسيات ثم تطبيق منظم ومستمر.</p>
+      <p>عندما تنظر إلى هذا المجال بعقلية مشروع طويل المدى، ستكتشف أن التحسن يتراكم بمرور الوقت، وأن كل تجربة تمنحك خبرة عملية تقرّبك من مستوى أعلى في الجودة والتأثير.</p>
+      <p>الخطأ الشائع أن يبدأ الناس بحماس كبير ثم يتوقفون عند أول تحدٍ. في الحقيقة، أي مسار يمر بمراحل تعلم طبيعية: مرحلة الاكتشاف، ثم التجربة، ثم بناء أسلوب خاص. المهم أن تحوّل الهدف الكبير إلى خطوات صغيرة قابلة للقياس.</p>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <!-- القسم الأول -->
+    <div class="section" id="s1">
+      <div class="section-head">
+        <span class="section-num">١</span>
+        <h2>بناء الأساس الصحيح</h2>
       </div>
-    </section>
+      <p>الأساس الأول هو وضوح الهدف قبل أي خطوة تنفيذية. كثيرون يبدأون العمل دون تعريف دقيق لما يريدون الوصول إليه، فيتشتت الجهد بين مهام كثيرة لا تقود إلى نتيجة.</p>
+      <p>لذلك من الضروري أن تحدد مخرجًا واضحًا: ما الذي تريد تحقيقه خلال شهر؟ ما المؤشر الذي يثبت أنك تتقدم؟ عندما تصبح الإجابة محددة، يصبح اختيار الأدوات والخطوات أسهل وأكثر منطقية.</p>
+      <p>بعد تحديد الهدف، ابدأ ببناء خطة أسبوعية مرنة تتضمن مهامًا قصيرة بوقت محدد. لا تجعل الخطة مثالية أكثر من اللازم، لأن الواقعية أهم من التعقيد. هذا الإيقاع البسيط يمنع الانقطاع، ويخلق تراكمًا معرفيًا يمنحك أسلوبًا أكثر احترافية.</p>
+    </div>
 
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-gold">✦</div><h2>بناء الأساس الصحيح</h2></div>
-      <p>الأساس الأول في «10 برومبتات ترفع جودة الكتابة بالعربية» هو وضوح الهدف قبل أي خطوة تنفيذية. كثيرون يبدأون العمل دون تعريف دقيق لما يريدون الوصول إليه، فيتشتت الجهد بين مهام كثيرة لا تقود إلى نتيجة. لذلك من الضروري أن تحدد مخرجًا واضحًا: ما الذي تريد تحقيقه خلال شهر؟ ما المؤشر الذي يثبت أنك تتقدم؟ عندما تصبح الإجابة محددة، يصبح اختيار الأدوات والخطوات أسهل وأكثر منطقية.</p>
-      <p>بعد تحديد الهدف، ابدأ ببناء خطة أسبوعية مرنة تتضمن مهامًا قصيرة بوقت محدد. لا تجعل الخطة مثالية أكثر من اللازم، لأن الواقعية أهم من التعقيد. يكفي أن تلتزم بنمط ثابت من التعلم والتطبيق والمراجعة. هذا الإيقاع البسيط يمنع الانقطاع، ويخلق تراكمًا معرفيًا يجعل تنفيذ «10 برومبتات ترفع جودة الكتابة بالعربية» أكثر احترافية مع كل دورة عمل جديدة.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-purple">◆</div><h2>رفع الجودة وتحسين المخرجات</h2></div>
-      <p>الجانب الثاني يتعلق بالجودة. أي عمل ضمن «10 برومبتات ترفع جودة الكتابة بالعربية» يحتاج معايير واضحة حتى لا تعتمد على التقدير العشوائي. ضع قائمة تحقق قبل اعتماد أي نتيجة: هل الفكرة واضحة؟ هل اللغة مناسبة للجمهور؟ هل التنفيذ يخدم الهدف الفعلي؟ وجود هذه المعايير يمنحك قدرة أعلى على تقييم المخرجات بموضوعية، ويقلل الأخطاء المتكررة التي تستهلك الوقت لاحقًا.</p>
-      <p>ومن المفيد أيضًا إنشاء نظام مراجعة مرحلي بدل انتظار النسخة النهائية. راجع العمل على دفعات صغيرة، ودوّن الملاحظات فورًا، ثم حسّن النسخة التالية بناءً على ملاحظات واقعية. هذه الطريقة ترفع الجودة بسرعة لأنها تعتمد على التغذية الراجعة المستمرة. ومع مرور الوقت ستلاحظ أن قراراتك أصبحت أدق، وأن مستوى الإنجاز في «10 برومبتات ترفع جودة الكتابة بالعربية» صار أكثر ثباتًا ونضجًا.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-orange">◉</div><h2>الاستمرارية والتوسع الذكي</h2></div>
-      <p>أما الجانب الثالث فهو الاستدامة والتوسع. النجاح الحقيقي لا يقاس بنتيجة جيدة واحدة، بل بقدرتك على تكرار النجاح في ظروف مختلفة. لذلك احرص على توثيق ما ينجح معك: الأساليب الفعالة، الأخطاء التي يجب تجنبها، والخطوات التي اختصرت عليك الوقت. هذا التوثيق يتحول لاحقًا إلى دليل تشغيل شخصي يرفع سرعتك في أي مشروع جديد.</p>
-      <p>عند الوصول إلى مستوى ثابت، ابدأ بالتطوير التدريجي: جرّب أدوات إضافية، وسّع نطاق التطبيق، أو شارك النتائج مع جمهور أوسع للحصول على ملاحظات أعمق. التوسع الذكي يعني أن تحافظ على الجودة الأساسية بينما تزيد الأثر. وبهذه العقلية يصبح «10 برومبتات ترفع جودة الكتابة بالعربية» ليس مجرد تجربة مؤقتة، بل مهارة عملية طويلة المدى تعود عليك بقيمة مستمرة.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>نقاط أساسية</h2>
-      <div class="grid">
-        <div class="card"><span class="badge badge-gold">وضوح الهدف</span><p><strong>وضوح الهدف</strong></p><p>تحديد نتيجة قابلة للقياس يمنع التشتت ويجعل كل خطوة ضمن مسار واضح.</p></div>
-        <div class="card"><span class="badge badge-green">تحسين مستمر</span><p><strong>تحسين مستمر</strong></p><p>المراجعة المرحلية تقلل الأخطاء وتسرّع الوصول إلى مستوى احترافي ثابت.</p></div>
-        <div class="card"><span class="badge badge-purple">توثيق المعرفة</span><p><strong>توثيق المعرفة</strong></p><p>تسجيل ما نجح وما فشل يحول الخبرة اليومية إلى نظام عمل قابل للتكرار.</p></div>
+    <!-- القسم الثاني -->
+    <div class="section" id="s2">
+      <div class="section-head">
+        <span class="section-num">٢</span>
+        <h2>رفع الجودة وتحسين المخرجات</h2>
       </div>
-    </section>
+      <p>أي عمل احترافي يحتاج معايير واضحة حتى لا تعتمد على التقدير العشوائي. ضع قائمة تحقق قبل اعتماد أي نتيجة: هل الفكرة واضحة؟ هل اللغة مناسبة للجمهور؟ هل التنفيذ يخدم الهدف الفعلي؟</p>
+      <p>وجود هذه المعايير يمنحك قدرة أعلى على تقييم المخرجات بموضوعية، ويقلل الأخطاء المتكررة التي تستهلك الوقت لاحقًا. ومن المفيد إنشاء نظام مراجعة مرحلي بدل انتظار النسخة النهائية.</p>
+      <p>راجع العمل على دفعات صغيرة، ودوّن الملاحظات فورًا، ثم حسّن النسخة التالية بناءً على ملاحظات واقعية. هذه الطريقة ترفع الجودة بسرعة لأنها تعتمد على التغذية الراجعة المستمرة.</p>
+    </div>
 
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>خطوات عملية للتنفيذ</h2>
-      <div class="card"><p><span class="muted">1.</span> حدّد هدفًا أسبوعيًا واضحًا مرتبطًا مباشرة بموضوع «10 برومبتات ترفع جودة الكتابة بالعربية» ويمكن قياسه.</p></div>
-      <div class="card"><p><span class="muted">2.</span> قسّم الهدف إلى مهام يومية قصيرة مع وقت محدد لكل مهمة.</p></div>
-      <div class="card"><p><span class="muted">3.</span> نفّذ ثم راجع المخرجات باستخدام قائمة معايير ثابتة للجودة.</p></div>
-      <div class="card"><p><span class="muted">4.</span> دوّن الدروس المستفادة بعد كل دورة عمل لتحسين القرار التالي.</p></div>
-      <div class="card"><p><span class="muted">5.</span> وسّع التطبيق تدريجيًا بعد تحقيق ثبات في النتائج الأساسية.</p></div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>الخاتمة</h2>
-      <div class="card">
-        <p>الخلاصة أن النجاح في «10 برومبتات ترفع جودة الكتابة بالعربية» يحتاج منهجًا واضحًا أكثر مما يحتاج حماسًا لحظيًا. ابدأ بهدف محدد، اعمل بخطة واقعية، وقيّم النتائج بمعايير ثابتة، ثم حسّن بشكل مستمر. هذه المعادلة البسيطة كافية لصناعة فرق كبير على المدى المتوسط والبعيد.</p>
-        <p>إذا التزمت بالتطبيق المنتظم، ستلاحظ أن التعقيد يقل تدريجيًا، وأن الثقة في قراراتك تزيد مع كل خطوة. ابدأ اليوم بخطوة صغيرة لكن جادة، واجعل التطوير عادة يومية. بهذه الروح ستحول «10 برومبتات ترفع جودة الكتابة بالعربية» إلى إنجاز ملموس وفرصة حقيقية للنمو الشخصي والمهني.</p>
+    <!-- القسم الثالث -->
+    <div class="section" id="s3">
+      <div class="section-head">
+        <span class="section-num">٣</span>
+        <h2>الاستمرارية والتوسع الذكي</h2>
       </div>
-    </section>
+      <p>النجاح الحقيقي لا يقاس بنتيجة جيدة واحدة، بل بقدرتك على تكرار النجاح في ظروف مختلفة. لذلك احرص على توثيق ما ينجح معك: الأساليب الفعالة، الأخطاء التي يجب تجنبها، والخطوات التي اختصرت عليك الوقت.</p>
+      <p>هذا التوثيق يتحول لاحقًا إلى دليل تشغيل شخصي يرفع سرعتك في أي مشروع جديد. عند الوصول إلى مستوى ثابت، ابدأ بالتطوير التدريجي: جرّب أدوات إضافية، وسّع نطاق التطبيق، أو شارك النتائج مع جمهور أوسع.</p>
+      <p>التوسع الذكي يعني أن تحافظ على الجودة الأساسية بينما تزيد الأثر. وبهذه العقلية تصبح الكتابة الجيدة مهارة عملية طويلة المدى تعود عليك بقيمة مستمرة.</p>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <!-- نقاط أساسية -->
+    <div class="section" id="s4">
+      <h2 class="steps-title">نقاط أساسية</h2>
+      <div class="key-grid">
+        <div class="key-card">
+          <span class="key-tag t-terracotta">وضوح الهدف</span>
+          <h3>ابدأ بسؤال</h3>
+          <p>تحديد نتيجة قابلة للقياس يمنع التشتت ويجعل كل خطوة ضمن مسار واضح.</p>
+        </div>
+        <div class="key-card">
+          <span class="key-tag t-sage">تحسين مستمر</span>
+          <h3>راجع دائمًا</h3>
+          <p>المراجعة المرحلية تقلل الأخطاء وتسرّع الوصول إلى مستوى احترافي ثابت.</p>
+        </div>
+        <div class="key-card">
+          <span class="key-tag t-gold">توثيق المعرفة</span>
+          <h3>سجّل كل شيء</h3>
+          <p>تسجيل ما نجح وما فشل يحول الخبرة اليومية إلى نظام عمل قابل للتكرار.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- خطوات -->
+    <div class="section" id="s5">
+      <h2 class="steps-title">خطوات عملية للتنفيذ</h2>
+      <ol class="steps-list">
+        <li id="step1">حدّد هدفًا أسبوعيًا واضحًا مرتبطًا مباشرة بموضوع البرومبتات ويمكن قياسه بسهولة.</li>
+        <li id="step2">قسّم الهدف إلى مهام يومية قصيرة مع وقت محدد لكل مهمة حتى لا تتراكم.</li>
+        <li id="step3">نفّذ ثم راجع المخرجات باستخدام قائمة معايير ثابتة للجودة لا تتجاوزها.</li>
+        <li id="step4">دوّن الدروس المستفادة بعد كل دورة عمل لتحسين القرار في المرة القادمة.</li>
+        <li id="step5">وسّع التطبيق تدريجيًا بعد تحقيق ثبات واضح في نتائجك الأساسية.</li>
+      </ol>
+    </div>
+
+    <!-- خاتمة -->
+    <div class="closing section" id="s6">
+      <p class="closing-highlight">النجاح يحتاج منهجًا واضحًا أكثر مما يحتاج حماسًا لحظيًا.</p>
+      <p>ابدأ بهدف محدد، اعمل بخطة واقعية، وقيّم النتائج بمعايير ثابتة، ثم حسّن بشكل مستمر. هذه المعادلة البسيطة كافية لصناعة فرق كبير على المدى المتوسط والبعيد.</p>
+      <p>إذا التزمت بالتطبيق المنتظم، ستلاحظ أن التعقيد يقل تدريجيًا، وأن الثقة في قراراتك تزيد مع كل خطوة. ابدأ اليوم بخطوة صغيرة لكن جادة، واجعل التطوير عادة يومية لا تحتاج تذكيرًا.</p>
+    </div>
+
   </main>
+
+  <footer>
+    دليل عملي · 10 برومبتات ترفع جودة الكتابة بالعربية
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+    // Stagger steps animation
+    const stepObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const steps = entry.target.querySelectorAll('li');
+          steps.forEach((li, i) => {
+            setTimeout(() => li.classList.add('visible'), i * 110);
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const stepsSection = document.querySelector('#s5');
+    if (stepsSection) stepObserver.observe(stepsSection);
+  </script>
+
 </body>
 </html>
+
