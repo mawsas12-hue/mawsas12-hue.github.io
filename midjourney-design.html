@@ -1,249 +1,513 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تصميم صور تسويقية جذابة خلال دقائق</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تصميم صور تسويقية بالذكاء الاصطناعي</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --gold: #f5c842;
-  --gold-light: #ffe98a;
-  --dark: #0a0a0f;
-  --accent: #ff6b35;
-  --accent2: #a855f7;
-  --text: #e8e8f0;
-  --text-muted: #888899;
-  --card-bg: rgba(255,255,255,0.04);
-  --border: rgba(245,200,66,0.15);
+  --bg: #faf8f5;
+  --ink: #1a1208;
+  --warm: #f5ede0;
+  --card: #fff;
+  --border: #e8ddd0;
+  --gold: #c9922a;
+  --gold-light: #f0c870;
+  --rust: #c44b2b;
+  --teal: #1a7a6e;
+  --muted: #7a6a55;
+  --tag-bg: #f2ebe1;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body {
-  font-family: 'Cairo', sans-serif;
-  background: var(--dark);
-  color: var(--text);
-  line-height: 1.7;
+  font-family:'Noto Kufi Arabic', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
 }
 
+/* ─── NOISE TEXTURE OVERLAY ─── */
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(168,85,247,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(245,200,66,0.07) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
 }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1;
-}
-
-/* عنوان رئيسي */
-h1 {
-  font-family: 'Tajawal', sans-serif;
-  font-weight: 900;
-  background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* بطاقة */
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 22px;
-  transition: all 0.3s;
-}
-
-.card:hover {
-  border-color: rgba(245,200,66,0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(245,200,66,0.08);
-}
-
-/* شبكة بطاقات */
-.grid {
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
+  grid-template-rows: auto 1fr auto;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-/* شارة */
-.badge {
-  display: inline-block;
-  border-radius: 50px;
-  padding: 3px 12px;
-  font-size: 11px;
-  font-weight: 700;
+.hero-top-bar {
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index:2;
+}
+.logo { font-size:1rem; font-weight:700; letter-spacing:1px; color:var(--gold); }
+.nav-tag {
+  font-size:0.72rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase;
+  font-family:'Tajawal',sans-serif;
 }
 
-.badge-gold {
-  background: rgba(245,200,66,0.15);
-  color: var(--gold);
-  border: 1px solid rgba(245,200,66,0.3);
+.hero-main {
+  display:grid; grid-template-columns:1fr 1fr;
+  align-items:center; gap:0;
+  position:relative; z-index:2;
 }
 
-.badge-green {
-  background: rgba(34,197,94,0.15);
-  color: #4ade80;
-  border: 1px solid rgba(34,197,94,0.3);
+.hero-text { padding: 4rem 3rem 4rem 2rem; }
+
+.issue-num {
+  display:inline-flex; align-items:center; gap:10px;
+  margin-bottom: 2rem;
+}
+.issue-line { width:40px; height:2px; background:var(--rust); }
+.issue-label { font-size:0.72rem; letter-spacing:3px; color:var(--rust); text-transform:uppercase; font-family:'Tajawal',sans-serif; }
+
+h1 {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+.h1-accent { color: var(--gold); }
+
+.hero-desc {
+  font-family:'Tajawal',sans-serif; font-weight:300;
+  font-size:1.05rem; line-height:1.9; color:var(--muted);
+  max-width:420px; margin-bottom:2.5rem;
 }
 
-.badge-purple {
-  background: rgba(168,85,247,0.15);
-  color: #c084fc;
-  border: 1px solid rgba(168,85,247,0.3);
+.hero-actions { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+.btn-primary {
+  padding:12px 28px; background:var(--ink); color:#fff;
+  border-radius:6px; font-weight:700; font-size:0.9rem;
+  text-decoration:none; transition:background 0.2s, transform 0.2s;
+  font-family:'Noto Kufi Arabic',sans-serif;
 }
+.btn-primary:hover { background:var(--gold); transform:translateY(-2px); }
+.btn-ghost {
+  font-size:0.85rem; color:var(--muted); text-decoration:none;
+  display:flex; align-items:center; gap:6px;
+  font-family:'Tajawal',sans-serif; transition:color 0.2s;
+}
+.btn-ghost:hover { color:var(--ink); }
 
-.badge-red {
-  background: rgba(255,107,53,0.15);
-  color: var(--accent);
-  border: 1px solid rgba(255,107,53,0.3);
+/* Hero Visual Panel */
+.hero-visual {
+  background: var(--ink);
+  height:100%;
+  min-height:500px;
+  position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
 }
+.hero-visual-bg {
+  position:absolute;inset:0;
+  background: radial-gradient(ellipse at 30% 50%, #2a1a05 0%, #0d0a06 100%);
+}
+.canvas-demo {
+  position:relative; z-index:2;
+  width:320px;
+}
+.canvas-frame {
+  background: #1a1208; border:1px solid #3a2a15;
+  border-radius:12px; padding:1.5rem; margin-bottom:1rem;
+}
+.canvas-img-mock {
+  width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden;
+  background: linear-gradient(135deg, #2a1808 0%, #1a3020 40%, #1a1830 100%);
+  position:relative; margin-bottom:1rem;
+  display:flex; align-items:center; justify-content:center;
+}
+.canvas-glow {
+  position:absolute; width:160px; height:160px; border-radius:50%;
+  background: radial-gradient(circle, rgba(201,146,42,0.4) 0%, transparent 70%);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse { 0%,100%{opacity:0.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.2)} }
+.canvas-shapes {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.shape {
+  position:absolute; border-radius:50%;
+  background: linear-gradient(135deg, var(--gold), var(--rust));
+  opacity:0.7;
+}
+.s1 { width:80px;height:80px; top:20%;left:20%; animation:float 4s ease-in-out infinite; }
+.s2 { width:50px;height:50px; bottom:25%;right:25%; animation:float 4s 1.5s ease-in-out infinite; border-radius:8px; }
+.s3 { width:30px;height:30px; top:50%;right:20%; animation:float 4s 0.8s ease-in-out infinite; opacity:0.4; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-/* فاصل */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 40px 0;
-}
+.canvas-label { font-size:0.65rem; color:#5a4a35; text-align:center; letter-spacing:1px; font-family:'Tajawal',sans-serif; }
 
-/* أيقونة قسم */
-.icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
+.prompt-bubble {
+  background: #1a1208; border:1px solid #3a2a15;
+  border-radius:10px; padding:1rem 1.2rem;
+  font-size:0.75rem; color:#c8a878; font-family:'Tajawal',sans-serif;
+  line-height:1.6; direction:ltr; text-align:left;
 }
+.prompt-cursor {
+  display:inline-block; width:2px; height:14px;
+  background:var(--gold-light); margin-right:2px;
+  animation:blink 1s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-.icon-gold {
-  background: rgba(245,200,66,0.15);
-  border: 1px solid rgba(245,200,66,0.3);
+/* STATS ROW */
+.stats-row {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--border);
+  position:relative; z-index:2;
 }
+.stat-item {
+  padding:1.5rem 2rem; border-left:1px solid var(--border);
+  display:flex; flex-direction:column; gap:4px;
+}
+.stat-item:last-child { border-left:none; }
+.stat-n { font-size:1.8rem; font-weight:900; color:var(--ink); }
+.stat-n span { color:var(--gold); }
+.stat-d { font-size:0.78rem; color:var(--muted); font-family:'Tajawal',sans-serif; }
 
-.icon-purple {
-  background: rgba(168,85,247,0.15);
-  border: 1px solid rgba(168,85,247,0.3);
-}
+/* ─── CONTENT ─── */
+.content-wrap { max-width:1100px; margin:0 auto; padding:5rem 2rem; }
 
-.icon-orange {
-  background: rgba(255,107,53,0.15);
-  border: 1px solid rgba(255,107,53,0.3);
+.section-header { margin-bottom:3rem; }
+.section-kicker {
+  display:flex; align-items:center; gap:10px; margin-bottom:1rem;
 }
+.kicker-line { width:24px; height:2px; background:var(--gold); }
+.kicker-text { font-size:0.72rem; letter-spacing:3px; color:var(--gold); text-transform:uppercase; font-family:'Tajawal',sans-serif; }
+.section-h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; line-height:1.2; margin-bottom:0.8rem; }
+.section-p { color:var(--muted); font-family:'Tajawal',sans-serif; font-weight:300; font-size:1rem; line-height:1.9; max-width:580px; }
 
-/* نص ثانوي */
-.muted {
-  color: var(--text-muted);
-  font-size: 13px;
+/* Formula */
+.formula-wrap {
+  background:var(--ink); border-radius:16px; padding:2.5rem;
+  margin:3rem 0; color:#fff; position:relative; overflow:hidden;
 }
+.formula-wrap::before {
+  content:''; position:absolute; top:-60px; left:-60px;
+  width:200px;height:200px; border-radius:50%;
+  background:radial-gradient(circle,rgba(201,146,42,0.2) 0%,transparent 70%);
+}
+.formula-title { font-size:0.75rem; letter-spacing:3px; color:var(--gold-light); text-transform:uppercase; font-family:'Tajawal',sans-serif; margin-bottom:1.5rem; }
+.formula-eq {
+  display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  font-size:clamp(0.9rem,2vw,1.1rem); font-weight:700;
+}
+.f-part {
+  background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12);
+  border-radius:8px; padding:10px 16px; display:flex; flex-direction:column; gap:2px;
+}
+.f-part-label { font-size:0.6rem; color:var(--gold-light); letter-spacing:2px; font-family:'Tajawal',sans-serif; font-weight:300; }
+.f-part-val { font-size:0.95rem; font-weight:700; }
+.f-op { color:var(--gold-light); font-size:1.4rem; font-weight:300; }
 
-/* أنيميشن */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Steps */
+.steps { display:grid; gap:0; }
+.step-row {
+  display:grid; grid-template-columns:80px 1fr;
+  border-bottom:1px solid var(--border);
+  transition:background 0.2s;
 }
+.step-row:last-child { border-bottom:none; }
+.step-row:hover { background:var(--warm); }
+.step-num-col {
+  padding:2rem 1.5rem; border-left:1px solid var(--border);
+  display:flex; align-items:flex-start; justify-content:center; padding-top:2.2rem;
+}
+.step-num-big { font-size:2.5rem; font-weight:900; color:var(--border); line-height:1; }
+.step-row:hover .step-num-big { color:var(--gold); }
+.step-body { padding:2rem 1.5rem 2rem 0; }
+.step-tag {
+  display:inline-block; font-size:0.68rem; padding:3px 10px;
+  border-radius:4px; background:var(--tag-bg); color:var(--gold);
+  border:1px solid #e0cc99; letter-spacing:1px; margin-bottom:0.8rem;
+  font-family:'Tajawal',sans-serif;
+}
+.step-h3 { font-size:1.05rem; font-weight:700; margin-bottom:0.5rem; }
+.step-p { color:var(--muted); font-family:'Tajawal',sans-serif; font-weight:300; font-size:0.92rem; line-height:1.8; }
 
-.fade {
-  animation: fadeInUp 0.5s ease both;
+/* Prompt Examples */
+.prompts-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:3rem; }
+@media(max-width:700px){ .prompts-grid { grid-template-columns:1fr; } }
+
+.prompt-card {
+  border:1px solid var(--border); border-radius:12px; overflow:hidden;
+  transition:transform 0.2s, box-shadow 0.2s;
 }
-  </style>
+.prompt-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+.prompt-card-header {
+  padding:1rem 1.2rem; display:flex; align-items:center; gap:10px;
+  border-bottom:1px solid var(--border);
+}
+.pc-dot { width:10px;height:10px;border-radius:50%; }
+.pc-title { font-size:0.8rem; font-weight:700; }
+.prompt-card-body { padding:1.2rem; background:var(--card); }
+.prompt-text {
+  font-family:'Tajawal',sans-serif; font-size:0.82rem;
+  color:#3a3020; line-height:1.7;
+  direction:ltr; text-align:left;
+  background:#f8f4ee; border-radius:6px; padding:0.8rem 1rem;
+  border-right:3px solid;
+  margin-bottom:0.8rem;
+}
+.prompt-card.social .prompt-text { border-color:var(--rust); }
+.prompt-card.product .prompt-text { border-color:var(--teal); }
+.prompt-card.story .prompt-text { border-color:var(--gold); }
+.prompt-card.banner .prompt-text { border-color:#7B4FC0; }
+
+.prompt-result {
+  font-size:0.75rem; color:var(--muted); font-family:'Tajawal',sans-serif;
+  display:flex; align-items:center; gap:6px;
+}
+.result-dot { width:6px;height:6px;border-radius:50%;background:var(--teal); }
+
+/* Tips Grid */
+.tips-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+@media(max-width:700px){ .tips-grid{grid-template-columns:1fr;} }
+.tip-card {
+  background:var(--card); border:1px solid var(--border); border-radius:10px;
+  padding:1.2rem;
+}
+.tip-icon { font-size:1.4rem; margin-bottom:0.6rem; }
+.tip-h { font-size:0.9rem; font-weight:700; margin-bottom:0.3rem; }
+.tip-p { font-size:0.8rem; color:var(--muted); font-family:'Tajawal',sans-serif; font-weight:300; line-height:1.7; }
+
+/* Divider */
+.section-divider { border:none; border-top:1px solid var(--border); margin:0; }
+
+/* Footer */
+footer {
+  background:var(--ink); color:#8a7a65; text-align:center;
+  padding:2.5rem; font-size:0.82rem; font-family:'Tajawal',sans-serif;
+}
+footer strong { color:var(--gold-light); }
+
+/* Reveal */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:768px){
+  .hero-main { grid-template-columns:1fr; }
+  .hero-visual { display:none; }
+  .hero-top-bar { padding:1rem 1.5rem; }
+  .hero-text { padding:3rem 1.5rem; }
+  .stats-row { grid-template-columns:1fr; }
+  .stat-item { border-left:none; border-top:1px solid var(--border); }
+  .step-row { grid-template-columns:50px 1fr; }
+  .formula-eq { flex-direction:column; gap:0.5rem; }
+  .prompts-grid { grid-template-columns:1fr; }
+  .tips-grid { grid-template-columns:1fr; }
+}
+</style>
 </head>
 <body>
-  <main class="container">
-    <section class="hero fade">
-      <span class="hero-badge">دليل عملي متقدم</span>
-      <h1>تصميم صور تسويقية جذابة خلال دقائق</h1>
-      <p class="muted">دليل شامل يشرح منهجًا عمليًا لتطبيق موضوع: تصميم صور تسويقية جذابة خلال دقائق بطريقة واضحة قابلة للتنفيذ في الواقع.</p>
-    </section>
 
-    <div class="divider"></div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top-bar">
+    <div class="logo">✦ AI Visual</div>
+    <div class="nav-tag">دليل الصور التسويقية بالذكاء الاصطناعي</div>
+  </div>
 
-    <section class="fade">
-      <div class="card">
-        <p>يمثل موضوع «تصميم صور تسويقية جذابة خلال دقائق» فرصة حقيقية لكل شخص يريد الانتقال من الاستهلاك إلى الإنتاج. الفكرة الجوهرية هنا أن النتائج القوية لا تأتي من معرفة سطحية أو خطوات عشوائية، بل من فهم عميق للأساسيات، ثم تطبيق منظم ومستمر. عندما تنظر إلى هذا المجال بعقلية مشروع طويل المدى، ستكتشف أن التحسن يتراكم بمرور الوقت، وأن كل تجربة تمنحك خبرة عملية تقرّبك من مستوى أعلى في الجودة والتأثير.</p>
-        <p>الخطأ الشائع أن يبدأ الناس بحماس كبير ثم يتوقفون عند أول تحدٍ. في الحقيقة، أي مسار مرتبط بـ «تصميم صور تسويقية جذابة خلال دقائق» يمر بمراحل تعلم طبيعية: مرحلة الاكتشاف، ثم التجربة، ثم بناء أسلوب خاص. المهم هو أن تحوّل الهدف الكبير إلى خطوات صغيرة يمكن قياسها. بهذه الطريقة لن تبقى الفكرة مجرد نية، بل تتحول إلى تقدم ملموس يظهر في جودة العمل، وسرعة الإنجاز، وثقة أكبر عند اتخاذ القرار.</p>
-        <p>لكي تستفيد بشكل فعلي، تحتاج إلى مزيج من ثلاثة عناصر: المعرفة الصحيحة، والأدوات المناسبة، والانضباط في التنفيذ. المعرفة تساعدك على اختيار الاتجاه، والأدوات تختصر الوقت، والانضباط يحافظ على الاستمرارية. وعند الجمع بين هذه العناصر ضمن خطة واضحة، يصبح موضوع «تصميم صور تسويقية جذابة خلال دقائق» مسارًا عمليًا يفتح أمامك فرصًا مهنية وإبداعية أكبر بكثير مما تتوقع.</p>
+  <div class="hero-main">
+    <div class="hero-text">
+      <div class="issue-num">
+        <div class="issue-line"></div>
+        <div class="issue-label">دليل عملي</div>
       </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-gold">✦</div><h2>بناء الأساس الصحيح</h2></div>
-      <p>الأساس الأول في «تصميم صور تسويقية جذابة خلال دقائق» هو وضوح الهدف قبل أي خطوة تنفيذية. كثيرون يبدأون العمل دون تعريف دقيق لما يريدون الوصول إليه، فيتشتت الجهد بين مهام كثيرة لا تقود إلى نتيجة. لذلك من الضروري أن تحدد مخرجًا واضحًا: ما الذي تريد تحقيقه خلال شهر؟ ما المؤشر الذي يثبت أنك تتقدم؟ عندما تصبح الإجابة محددة، يصبح اختيار الأدوات والخطوات أسهل وأكثر منطقية.</p>
-      <p>بعد تحديد الهدف، ابدأ ببناء خطة أسبوعية مرنة تتضمن مهامًا قصيرة بوقت محدد. لا تجعل الخطة مثالية أكثر من اللازم، لأن الواقعية أهم من التعقيد. يكفي أن تلتزم بنمط ثابت من التعلم والتطبيق والمراجعة. هذا الإيقاع البسيط يمنع الانقطاع، ويخلق تراكمًا معرفيًا يجعل تنفيذ «تصميم صور تسويقية جذابة خلال دقائق» أكثر احترافية مع كل دورة عمل جديدة.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-purple">◆</div><h2>رفع الجودة وتحسين المخرجات</h2></div>
-      <p>الجانب الثاني يتعلق بالجودة. أي عمل ضمن «تصميم صور تسويقية جذابة خلال دقائق» يحتاج معايير واضحة حتى لا تعتمد على التقدير العشوائي. ضع قائمة تحقق قبل اعتماد أي نتيجة: هل الفكرة واضحة؟ هل اللغة مناسبة للجمهور؟ هل التنفيذ يخدم الهدف الفعلي؟ وجود هذه المعايير يمنحك قدرة أعلى على تقييم المخرجات بموضوعية، ويقلل الأخطاء المتكررة التي تستهلك الوقت لاحقًا.</p>
-      <p>ومن المفيد أيضًا إنشاء نظام مراجعة مرحلي بدل انتظار النسخة النهائية. راجع العمل على دفعات صغيرة، ودوّن الملاحظات فورًا، ثم حسّن النسخة التالية بناءً على ملاحظات واقعية. هذه الطريقة ترفع الجودة بسرعة لأنها تعتمد على التغذية الراجعة المستمرة. ومع مرور الوقت ستلاحظ أن قراراتك أصبحت أدق، وأن مستوى الإنجاز في «تصميم صور تسويقية جذابة خلال دقائق» صار أكثر ثباتًا ونضجًا.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-orange">◉</div><h2>الاستمرارية والتوسع الذكي</h2></div>
-      <p>أما الجانب الثالث فهو الاستدامة والتوسع. النجاح الحقيقي لا يقاس بنتيجة جيدة واحدة، بل بقدرتك على تكرار النجاح في ظروف مختلفة. لذلك احرص على توثيق ما ينجح معك: الأساليب الفعالة، الأخطاء التي يجب تجنبها، والخطوات التي اختصرت عليك الوقت. هذا التوثيق يتحول لاحقًا إلى دليل تشغيل شخصي يرفع سرعتك في أي مشروع جديد.</p>
-      <p>عند الوصول إلى مستوى ثابت، ابدأ بالتطوير التدريجي: جرّب أدوات إضافية، وسّع نطاق التطبيق، أو شارك النتائج مع جمهور أوسع للحصول على ملاحظات أعمق. التوسع الذكي يعني أن تحافظ على الجودة الأساسية بينما تزيد الأثر. وبهذه العقلية يصبح «تصميم صور تسويقية جذابة خلال دقائق» ليس مجرد تجربة مؤقتة، بل مهارة عملية طويلة المدى تعود عليك بقيمة مستمرة.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>نقاط أساسية</h2>
-      <div class="grid">
-        <div class="card"><span class="badge badge-gold">وضوح الهدف</span><p><strong>وضوح الهدف</strong></p><p>تحديد نتيجة قابلة للقياس يمنع التشتت ويجعل كل خطوة ضمن مسار واضح.</p></div>
-        <div class="card"><span class="badge badge-green">تحسين مستمر</span><p><strong>تحسين مستمر</strong></p><p>المراجعة المرحلية تقلل الأخطاء وتسرّع الوصول إلى مستوى احترافي ثابت.</p></div>
-        <div class="card"><span class="badge badge-purple">توثيق المعرفة</span><p><strong>توثيق المعرفة</strong></p><p>تسجيل ما نجح وما فشل يحول الخبرة اليومية إلى نظام عمل قابل للتكرار.</p></div>
+      <h1>صمّم صوراً<br><span class="h1-accent">تسويقية جذابة</span><br>خلال دقائق</h1>
+      <p class="hero-desc">خطوات عملية لصياغة برومبتات متوازنة بين الإبداع والدقة — باستخدام أدوات الذكاء الاصطناعي مثل Midjourney وDALL·E وAdobe Firefly.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#steps">ابدأ التعلم ↓</a>
+        <a class="btn-ghost" href="#examples">← أمثلة جاهزة</a>
       </div>
-    </section>
+    </div>
 
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>خطوات عملية للتنفيذ</h2>
-      <div class="card"><p><span class="muted">1.</span> حدّد هدفًا أسبوعيًا واضحًا مرتبطًا مباشرة بموضوع «تصميم صور تسويقية جذابة خلال دقائق» ويمكن قياسه.</p></div>
-      <div class="card"><p><span class="muted">2.</span> قسّم الهدف إلى مهام يومية قصيرة مع وقت محدد لكل مهمة.</p></div>
-      <div class="card"><p><span class="muted">3.</span> نفّذ ثم راجع المخرجات باستخدام قائمة معايير ثابتة للجودة.</p></div>
-      <div class="card"><p><span class="muted">4.</span> دوّن الدروس المستفادة بعد كل دورة عمل لتحسين القرار التالي.</p></div>
-      <div class="card"><p><span class="muted">5.</span> وسّع التطبيق تدريجيًا بعد تحقيق ثبات في النتائج الأساسية.</p></div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>الخاتمة</h2>
-      <div class="card">
-        <p>الخلاصة أن النجاح في «تصميم صور تسويقية جذابة خلال دقائق» يحتاج منهجًا واضحًا أكثر مما يحتاج حماسًا لحظيًا. ابدأ بهدف محدد، اعمل بخطة واقعية، وقيّم النتائج بمعايير ثابتة، ثم حسّن بشكل مستمر. هذه المعادلة البسيطة كافية لصناعة فرق كبير على المدى المتوسط والبعيد.</p>
-        <p>إذا التزمت بالتطبيق المنتظم، ستلاحظ أن التعقيد يقل تدريجيًا، وأن الثقة في قراراتك تزيد مع كل خطوة. ابدأ اليوم بخطوة صغيرة لكن جادة، واجعل التطوير عادة يومية. بهذه الروح ستحول «تصميم صور تسويقية جذابة خلال دقائق» إلى إنجاز ملموس وفرصة حقيقية للنمو الشخصي والمهني.</p>
+    <div class="hero-visual">
+      <div class="hero-visual-bg"></div>
+      <div class="canvas-demo">
+        <div class="canvas-frame">
+          <div class="canvas-img-mock">
+            <div class="canvas-glow"></div>
+            <div class="canvas-shapes">
+              <div class="shape s1"></div>
+              <div class="shape s2"></div>
+              <div class="shape s3"></div>
+            </div>
+          </div>
+          <div class="canvas-label">GENERATING IMAGE... 94%</div>
+        </div>
+        <div class="prompt-bubble">
+          "luxury Arabic perfume bottle, golden light,<br>
+          cinematic shot, 8K, dark background,<br>
+          photorealistic, product photography"<span class="prompt-cursor"></span>
+        </div>
       </div>
-    </section>
-  </main>
-</body>
-</html>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-n">3<span>×</span></div>
+      <div class="stat-d">أسرع من التصميم التقليدي</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">80<span>%</span></div>
+      <div class="stat-d">تقليل تكاليف إنتاج الصور</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">5<span>+</span></div>
+      <div class="stat-d">أدوات AI للصور المتخصصة</div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- FORMULA -->
+<div class="content-wrap">
+  <div class="section-header reveal">
+    <div class="section-kicker"><div class="kicker-line"></div><div class="kicker-text">معادلة البرومبت</div></div>
+    <h2 class="section-h2">صيغة البرومبت المثالي</h2>
+    <p class="section-p">كل برومبت ناجح يتكون من 5 عناصر أساسية — دمجها معاً يضمن نتيجة دقيقة واحترافية.</p>
+  </div>
+
+  <div class="formula-wrap reveal">
+    <div class="formula-title">معادلة البرومبت الاحترافي</div>
+    <div class="formula-eq">
+      <div class="f-part">
+        <div class="f-part-label">الموضوع</div>
+        <div class="f-part-val">Subject</div>
+      </div>
+      <div class="f-op">+</div>
+      <div class="f-part">
+        <div class="f-part-label">الأسلوب</div>
+        <div class="f-part-val">Style</div>
+      </div>
+      <div class="f-op">+</div>
+      <div class="f-part">
+        <div class="f-part-label">الإضاءة</div>
+        <div class="f-part-val">Lighting</div>
+      </div>
+      <div class="f-op">+</div>
+      <div class="f-part">
+        <div class="f-part-label">الجودة</div>
+        <div class="f-part-val">Quality</div>
+      </div>
+      <div class="f-op">+</div>
+      <div class="f-part">
+        <div class="f-part-label">السياق</div>
+        <div class="f-part-val">Context</div>
+      </div>
+      <div class="f-op">=</div>
+      <div class="f-part" style="border-color:var(--gold); background:rgba(201,146,42,0.15);">
+        <div class="f-part-label" style="color:var(--gold-light);">النتيجة</div>
+        <div class="f-part-val" style="color:var(--gold-light);">✦ صورة مثالية</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- STEPS -->
+<div class="content-wrap" id="steps">
+  <div class="section-header reveal">
+    <div class="section-kicker"><div class="kicker-line"></div><div class="kicker-text">الخطوات</div></div>
+    <h2 class="section-h2">من الفكرة إلى الصورة</h2>
+    <p class="section-p">اتبع هذه الخطوات لصياغة برومبت يوازن بين الإبداع والدقة في أي مشروع تسويقي.</p>
+  </div>
+
+  <div class="steps reveal">
+    <div class="step-row">
+      <div class="step-num-col"><div class="step-num-big">01</div></div>
+      <div class="step-body">
+        <div class="step-tag">الهدف التسويقي</div>
+        <h3 class="step-h3">حدّد هدف الصورة بدقة</h3>
+        <p class="step-p">قبل كتابة أي برومبت، اسأل نفسك: هل الصورة لإعلان منتج؟ محتوى سوشيال ميديا؟ بانر موقع؟ الهدف يحدد الأسلوب والتكوين المناسبين تماماً.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-col"><div class="step-num-big">02</div></div>
+      <div class="step-body">
+        <div class="step-tag">الموضوع الرئيسي</div>
+        <h3 class="step-h3">صف الموضوع بتفاصيل محددة</h3>
+        <p class="step-p">بدلاً من "قهوة"، اكتب "فنجان قهوة عربية بالهيل مع بخار خفيف، على طاولة خشب داكن". التفاصيل = نتائج أدق وأجمل بكثير.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-col"><div class="step-num-big">03</div></div>
+      <div class="step-body">
+        <div class="step-tag">الأسلوب البصري</div>
+        <h3 class="step-h3">اختر أسلوباً فنياً مرجعياً</h3>
+        <p class="step-p">أضف كلمات مثل: cinematic, editorial photography, flat lay, minimalist, luxury brand aesthetic. هذه الكلمات "تقفل" الأسلوب البصري بشكل احترافي.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-col"><div class="step-num-big">04</div></div>
+      <div class="step-body">
+        <div class="step-tag">الإضاءة واللون</div>
+        <h3 class="step-h3">تحكّم في الإضاءة والألوان</h3>
+        <p class="step-p">الإضاءة هي روح الصورة. جرّب: golden hour light، soft studio lighting، dramatic side lighting، neon glow. والألوان: warm tones, pastel palette, monochromatic.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-col"><div class="step-num-big">05</div></div>
+      <div class="step-body">
+        <div class="step-tag">الجودة والتقنية</div>
+        <h3 class="step-h3">أضف كلمات الجودة دائماً</h3>
+        <p class="step-p">في نهاية كل برومبت أضف: 8K, ultra-detailed, photorealistic, sharp focus, professional photography. هذه "الكلمات السحرية" ترفع جودة الإخراج بشكل ملحوظ.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-col"><div class="step-num-big">06</div></div>
+      <div class="step-body">
+        <div class="step-tag">التكرار والتحسين</div>
+        <h3 class="step-h3">عدّل وكرّر حتى الكمال</h3>
+        <p class="step-p">النسخة الأولى نادراً ما تكون مثالية. استخدم Variations أو أعد الصياغة مع إضافة أو حذف كلمات. سجّل البرومبتات الناجحة لإعادة استخدامها.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- EXAMPLES -->
+<div class="content-wrap" id="examples">
+  <div class="section-header reveal">
+    <div class="section-kicker"><div class="kicker-line"></div><div class="kicker-text">أمثلة جاهزة</div></div>
+    <h2 class="section-h2">برومبتات جاهزة للاستخدام</h2>
+    <p class="section-p">انسخ هذه البرومبتات مباشرة واستخدمها في Midjourney أو DALL·E أو Adobe Firefly.</p>
+  </div>
+
+  <div class="prompts-grid reveal">
+    <div class="prompt-card social">
+      <div class="prompt-card-header">
+        <div class="pc-dot" style="background:var(--rust)"></div>
+        <div class="pc-title">سوشيال ميديا — منتج عطور</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">luxury Arabic oud perfume bottle, floating in golden smoke, black marble background, dramatic side lighting, editorial product photography, 8K, ultra-detailed, bokeh effect</div>
+        <div class="prompt-result"><div class="result-dot"></div>مناسب لـ Instagram / Pinterest</div>
+      </div>
+    </div>
+
+    <div class="prompt-card product">
+      <div class="prompt-card-header">
+        <div class="pc-dot" style="background:var(--teal)"></div>
+        <div class="pc-title">منتج غذائي — مطعم</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">fresh Arabic mezze spread on rustic wooden table, top-down flat lay, natural daylight, vibrant colors, food magazine 
