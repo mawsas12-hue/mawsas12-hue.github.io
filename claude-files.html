@@ -3,247 +3,717 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تحليل ملفات طويلة بدون ضياع السياق</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <title>تحليل الملفات الطويلة بدون ضياع السياق</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-:root {
-  --gold: #f5c842;
-  --gold-light: #ffe98a;
-  --dark: #0a0a0f;
-  --accent: #ff6b35;
-  --accent2: #a855f7;
-  --text: #e8e8f0;
-  --text-muted: #888899;
-  --card-bg: rgba(255,255,255,0.04);
-  --border: rgba(245,200,66,0.15);
-}
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2330;
+      --border: #30363d;
+      --blue: #58a6ff;
+      --blue-dim: rgba(88,166,255,0.12);
+      --green: #3fb950;
+      --green-dim: rgba(63,185,80,0.12);
+      --orange: #f0883e;
+      --orange-dim: rgba(240,136,62,0.1);
+      --purple: #bc8cff;
+      --purple-dim: rgba(188,140,255,0.1);
+      --text: #e6edf3;
+      --text-muted: #7d8590;
+      --text-dim: #484f58;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-body {
-  font-family: 'Cairo', sans-serif;
-  background: var(--dark);
-  color: var(--text);
-  line-height: 1.7;
-}
+    body {
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      font-size: 15px;
+    }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(168,85,247,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(245,200,66,0.07) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
+    /* ── TOPBAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 32px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1;
-}
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
 
-/* عنوان رئيسي */
-h1 {
-  font-family: 'Tajawal', sans-serif;
-  font-weight: 900;
-  background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+    .topbar-brand .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite;
+    }
 
-/* بطاقة */
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 22px;
-  transition: all 0.3s;
-}
+    .topbar-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
 
-.card:hover {
-  border-color: rgba(245,200,66,0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(245,200,66,0.08);
-}
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
 
-/* شبكة بطاقات */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-}
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 32px 60px;
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
 
-/* شارة */
-.badge {
-  display: inline-block;
-  border-radius: 50px;
-  padding: 3px 12px;
-  font-size: 11px;
-  font-weight: 700;
-}
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0.4;
+    }
 
-.badge-gold {
-  background: rgba(245,200,66,0.15);
-  color: var(--gold);
-  border: 1px solid rgba(245,200,66,0.3);
-}
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid rgba(63,185,80,0.25);
+      border-radius: 4px;
+      padding: 4px 12px;
+      margin-bottom: 28px;
+    }
 
-.badge-green {
-  background: rgba(34,197,94,0.15);
-  color: #4ade80;
-  border: 1px solid rgba(34,197,94,0.3);
-}
+    .hero-tag::before { content: '▶'; font-size: 8px; }
 
-.badge-purple {
-  background: rgba(168,85,247,0.15);
-  color: #c084fc;
-  border: 1px solid rgba(168,85,247,0.3);
-}
+    h1 {
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
 
-.badge-red {
-  background: rgba(255,107,53,0.15);
-  color: var(--accent);
-  border: 1px solid rgba(255,107,53,0.3);
-}
+    h1 .accent { color: var(--blue); }
 
-/* فاصل */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 40px 0;
-}
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 36px;
+      font-weight: 300;
+    }
 
-/* أيقونة قسم */
-.icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
 
-.icon-gold {
-  background: rgba(245,200,66,0.15);
-  border: 1px solid rgba(245,200,66,0.3);
-}
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
 
-.icon-purple {
-  background: rgba(168,85,247,0.15);
-  border: 1px solid rgba(168,85,247,0.3);
-}
+    .stat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
 
-.icon-orange {
-  background: rgba(255,107,53,0.15);
-  border: 1px solid rgba(255,107,53,0.3);
-}
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
 
-/* نص ثانوي */
-.muted {
-  color: var(--text-muted);
-  font-size: 13px;
-}
+    /* ── CONTENT ── */
+    .content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
 
-/* أنيميشن */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    /* ── SECTION ── */
+    .block {
+      margin-bottom: 52px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
 
-.fade {
-  animation: fadeInUp 0.5s ease both;
-}
+    .block.show { opacity: 1; transform: translateY(0); }
+
+    .block-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .block-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .icon-blue { background: var(--blue-dim); border: 1px solid rgba(88,166,255,0.2); }
+    .icon-green { background: var(--green-dim); border: 1px solid rgba(63,185,80,0.2); }
+    .icon-orange { background: var(--orange-dim); border: 1px solid rgba(240,136,62,0.2); }
+    .icon-purple { background: var(--purple-dim); border: 1px solid rgba(188,140,255,0.2); }
+
+    .block-header h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .block p {
+      color: #8b949e;
+      margin-bottom: 14px;
+      font-weight: 300;
+      font-size: 15px;
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-lang {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .code-lang::before {
+      content: '';
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .code-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-body {
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #e6edf3;
+      direction: ltr;
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .code-body .kw { color: var(--purple); }
+    .code-body .str { color: var(--green); }
+    .code-body .cm { color: var(--text-dim); font-style: italic; }
+    .code-body .num { color: var(--orange); }
+
+    /* ── TIPS GRID ── */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .tip-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tip-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px;
+      height: 100%;
+    }
+
+    .tip-card.c-blue::before { background: var(--blue); }
+    .tip-card.c-green::before { background: var(--green); }
+    .tip-card.c-orange::before { background: var(--orange); }
+    .tip-card.c-purple::before { background: var(--purple); }
+
+    .tip-card:hover {
+      border-color: var(--text-dim);
+      transform: translateY(-2px);
+    }
+
+    .tip-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .tip-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .tip-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .step-row:last-child { border-bottom: none; }
+    .step-row:hover { background: var(--surface2); }
+
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+      padding: 18px 20px;
+      min-width: 60px;
+      border-left: 1px solid var(--border);
+      background: var(--surface2);
+      text-align: center;
+    }
+
+    .step-content {
+      padding: 16px 20px;
+      flex: 1;
+    }
+
+    .step-content strong {
+      display: block;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .step-content span {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex;
+      gap: 14px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(88,166,255,0.2);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+
+    .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+
+    .callout p {
+      font-size: 14px;
+      color: #8b949e;
+      margin: 0 !important;
+    }
+
+    .callout strong { color: var(--blue); }
+
+    /* ── DIVIDER ── */
+    .sep {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+      position: relative;
+    }
+
+    .sep::after {
+      content: '◆';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg);
+      color: var(--text-dim);
+      padding: 0 12px;
+      font-size: 10px;
+    }
+
+    /* ── CONCLUSION ── */
+    .conclusion {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .conclusion::after {
+      content: 'Claude';
+      position: absolute;
+      left: -10px;
+      bottom: -20px;
+      font-size: 8rem;
+      font-weight: 700;
+      color: rgba(88,166,255,0.04);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: -4px;
+    }
+
+    .conclusion h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .conclusion p {
+      font-size: 15px;
+      color: #8b949e;
+      margin-bottom: 14px;
+      font-weight: 300;
+      position: relative;
+    }
+
+    .conclusion p:last-child { margin: 0; }
+
+    .highlight-text {
+      color: var(--blue) !important;
+      font-weight: 500 !important;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .topbar { padding: 10px 16px; }
+      .hero, .content { padding-right: 16px; padding-left: 16px; }
+      .hero-stats { gap: 20px; }
+      .conclusion { padding: 28px 22px; }
+      footer { padding: 20px 16px; }
+    }
+
+    /* ── ANIM ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeIn 0.6s ease both; }
   </style>
 </head>
 <body>
-  <main class="container">
-    <section class="hero fade">
-      <span class="hero-badge">دليل عملي متقدم</span>
-      <h1>تحليل ملفات طويلة بدون ضياع السياق</h1>
-      <p class="muted">دليل شامل يشرح منهجًا عمليًا لتطبيق موضوع: تحليل ملفات طويلة بدون ضياع السياق بطريقة واضحة قابلة للتنفيذ في الواقع.</p>
-    </section>
 
-    <div class="divider"></div>
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <div class="topbar-brand">
+      <span class="dot"></span>
+      دليل Claude التقني
+    </div>
+    <div class="topbar-meta">v2.0 · 2026</div>
+  </nav>
 
-    <section class="fade">
-      <div class="card">
-        <p>يمثل موضوع «تحليل ملفات طويلة بدون ضياع السياق» فرصة حقيقية لكل شخص يريد الانتقال من الاستهلاك إلى الإنتاج. الفكرة الجوهرية هنا أن النتائج القوية لا تأتي من معرفة سطحية أو خطوات عشوائية، بل من فهم عميق للأساسيات، ثم تطبيق منظم ومستمر. عندما تنظر إلى هذا المجال بعقلية مشروع طويل المدى، ستكتشف أن التحسن يتراكم بمرور الوقت، وأن كل تجربة تمنحك خبرة عملية تقرّبك من مستوى أعلى في الجودة والتأثير.</p>
-        <p>الخطأ الشائع أن يبدأ الناس بحماس كبير ثم يتوقفون عند أول تحدٍ. في الحقيقة، أي مسار مرتبط بـ «تحليل ملفات طويلة بدون ضياع السياق» يمر بمراحل تعلم طبيعية: مرحلة الاكتشاف، ثم التجربة، ثم بناء أسلوب خاص. المهم هو أن تحوّل الهدف الكبير إلى خطوات صغيرة يمكن قياسها. بهذه الطريقة لن تبقى الفكرة مجرد نية، بل تتحول إلى تقدم ملموس يظهر في جودة العمل، وسرعة الإنجاز، وثقة أكبر عند اتخاذ القرار.</p>
-        <p>لكي تستفيد بشكل فعلي، تحتاج إلى مزيج من ثلاثة عناصر: المعرفة الصحيحة، والأدوات المناسبة، والانضباط في التنفيذ. المعرفة تساعدك على اختيار الاتجاه، والأدوات تختصر الوقت، والانضباط يحافظ على الاستمرارية. وعند الجمع بين هذه العناصر ضمن خطة واضحة، يصبح موضوع «تحليل ملفات طويلة بدون ضياع السياق» مسارًا عمليًا يفتح أمامك فرصًا مهنية وإبداعية أكبر بكثير مما تتوقع.</p>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-tag">تحليل المستندات</div>
+    <h1>تحليل الملفات الطويلة<br><span class="accent">بدون ضياع السياق</span></h1>
+    <p class="hero-desc">كيف تستخدم Claude لتلخيص المستندات الضخمة واستخراج النقاط الحرجة بدقة واحترافية.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">200K</span>
+        <span class="stat-label">حجم النافذة السياقية</span>
       </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-gold">✦</div><h2>بناء الأساس الصحيح</h2></div>
-      <p>الأساس الأول في «تحليل ملفات طويلة بدون ضياع السياق» هو وضوح الهدف قبل أي خطوة تنفيذية. كثيرون يبدأون العمل دون تعريف دقيق لما يريدون الوصول إليه، فيتشتت الجهد بين مهام كثيرة لا تقود إلى نتيجة. لذلك من الضروري أن تحدد مخرجًا واضحًا: ما الذي تريد تحقيقه خلال شهر؟ ما المؤشر الذي يثبت أنك تتقدم؟ عندما تصبح الإجابة محددة، يصبح اختيار الأدوات والخطوات أسهل وأكثر منطقية.</p>
-      <p>بعد تحديد الهدف، ابدأ ببناء خطة أسبوعية مرنة تتضمن مهامًا قصيرة بوقت محدد. لا تجعل الخطة مثالية أكثر من اللازم، لأن الواقعية أهم من التعقيد. يكفي أن تلتزم بنمط ثابت من التعلم والتطبيق والمراجعة. هذا الإيقاع البسيط يمنع الانقطاع، ويخلق تراكمًا معرفيًا يجعل تنفيذ «تحليل ملفات طويلة بدون ضياع السياق» أكثر احترافية مع كل دورة عمل جديدة.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-purple">◆</div><h2>رفع الجودة وتحسين المخرجات</h2></div>
-      <p>الجانب الثاني يتعلق بالجودة. أي عمل ضمن «تحليل ملفات طويلة بدون ضياع السياق» يحتاج معايير واضحة حتى لا تعتمد على التقدير العشوائي. ضع قائمة تحقق قبل اعتماد أي نتيجة: هل الفكرة واضحة؟ هل اللغة مناسبة للجمهور؟ هل التنفيذ يخدم الهدف الفعلي؟ وجود هذه المعايير يمنحك قدرة أعلى على تقييم المخرجات بموضوعية، ويقلل الأخطاء المتكررة التي تستهلك الوقت لاحقًا.</p>
-      <p>ومن المفيد أيضًا إنشاء نظام مراجعة مرحلي بدل انتظار النسخة النهائية. راجع العمل على دفعات صغيرة، ودوّن الملاحظات فورًا، ثم حسّن النسخة التالية بناءً على ملاحظات واقعية. هذه الطريقة ترفع الجودة بسرعة لأنها تعتمد على التغذية الراجعة المستمرة. ومع مرور الوقت ستلاحظ أن قراراتك أصبحت أدق، وأن مستوى الإنجاز في «تحليل ملفات طويلة بدون ضياع السياق» صار أكثر ثباتًا ونضجًا.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <div class="section-title"><div class="icon icon-orange">◉</div><h2>الاستمرارية والتوسع الذكي</h2></div>
-      <p>أما الجانب الثالث فهو الاستدامة والتوسع. النجاح الحقيقي لا يقاس بنتيجة جيدة واحدة، بل بقدرتك على تكرار النجاح في ظروف مختلفة. لذلك احرص على توثيق ما ينجح معك: الأساليب الفعالة، الأخطاء التي يجب تجنبها، والخطوات التي اختصرت عليك الوقت. هذا التوثيق يتحول لاحقًا إلى دليل تشغيل شخصي يرفع سرعتك في أي مشروع جديد.</p>
-      <p>عند الوصول إلى مستوى ثابت، ابدأ بالتطوير التدريجي: جرّب أدوات إضافية، وسّع نطاق التطبيق، أو شارك النتائج مع جمهور أوسع للحصول على ملاحظات أعمق. التوسع الذكي يعني أن تحافظ على الجودة الأساسية بينما تزيد الأثر. وبهذه العقلية يصبح «تحليل ملفات طويلة بدون ضياع السياق» ليس مجرد تجربة مؤقتة، بل مهارة عملية طويلة المدى تعود عليك بقيمة مستمرة.</p>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>نقاط أساسية</h2>
-      <div class="grid">
-        <div class="card"><span class="badge badge-gold">وضوح الهدف</span><p><strong>وضوح الهدف</strong></p><p>تحديد نتيجة قابلة للقياس يمنع التشتت ويجعل كل خطوة ضمن مسار واضح.</p></div>
-        <div class="card"><span class="badge badge-green">تحسين مستمر</span><p><strong>تحسين مستمر</strong></p><p>المراجعة المرحلية تقلل الأخطاء وتسرّع الوصول إلى مستوى احترافي ثابت.</p></div>
-        <div class="card"><span class="badge badge-purple">توثيق المعرفة</span><p><strong>توثيق المعرفة</strong></p><p>تسجيل ما نجح وما فشل يحول الخبرة اليومية إلى نظام عمل قابل للتكرار.</p></div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">عمق التحليل</span>
       </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>خطوات عملية للتنفيذ</h2>
-      <div class="card"><p><span class="muted">1.</span> حدّد هدفًا أسبوعيًا واضحًا مرتبطًا مباشرة بموضوع «تحليل ملفات طويلة بدون ضياع السياق» ويمكن قياسه.</p></div>
-      <div class="card"><p><span class="muted">2.</span> قسّم الهدف إلى مهام يومية قصيرة مع وقت محدد لكل مهمة.</p></div>
-      <div class="card"><p><span class="muted">3.</span> نفّذ ثم راجع المخرجات باستخدام قائمة معايير ثابتة للجودة.</p></div>
-      <div class="card"><p><span class="muted">4.</span> دوّن الدروس المستفادة بعد كل دورة عمل لتحسين القرار التالي.</p></div>
-      <div class="card"><p><span class="muted">5.</span> وسّع التطبيق تدريجيًا بعد تحقيق ثبات في النتائج الأساسية.</p></div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="fade">
-      <h2>الخاتمة</h2>
-      <div class="card">
-        <p>الخلاصة أن النجاح في «تحليل ملفات طويلة بدون ضياع السياق» يحتاج منهجًا واضحًا أكثر مما يحتاج حماسًا لحظيًا. ابدأ بهدف محدد، اعمل بخطة واقعية، وقيّم النتائج بمعايير ثابتة، ثم حسّن بشكل مستمر. هذه المعادلة البسيطة كافية لصناعة فرق كبير على المدى المتوسط والبعيد.</p>
-        <p>إذا التزمت بالتطبيق المنتظم، ستلاحظ أن التعقيد يقل تدريجيًا، وأن الثقة في قراراتك تزيد مع كل خطوة. ابدأ اليوم بخطوة صغيرة لكن جادة، واجعل التطوير عادة يومية. بهذه الروح ستحول «تحليل ملفات طويلة بدون ضياع السياق» إلى إنجاز ملموس وفرصة حقيقية للنمو الشخصي والمهني.</p>
+      <div class="stat">
+        <span class="stat-num">3x</span>
+        <span class="stat-label">توفير في الوقت</span>
       </div>
-    </section>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- المشكلة -->
+    <div class="block" id="b1">
+      <div class="block-header">
+        <div class="block-icon icon-orange">⚠</div>
+        <h2>المشكلة: الملفات الطويلة تضيّع السياق</h2>
+      </div>
+      <p>عندما تحاول تحليل وثيقة تتجاوز عشرات الصفحات، يواجه معظم الناس نفس المشكلة: إما يقرأون سطحيًا ويفقدون التفاصيل المهمة، أو يغرقون في التفاصيل ويضيعون الصورة الكبيرة.</p>
+      <p>Claude مصمم للتعامل مع هذا التحدي تحديدًا — نافذة سياق ضخمة تسمح بإدخال المستند كاملًا دفعة واحدة، مع قدرة تحليلية تستخرج البنية والمعنى معًا.</p>
+
+      <div class="callout">
+        <div class="callout-icon">💡</div>
+        <p><strong>نصيحة أساسية:</strong> لا تقطّع الملف يدويًا — أدخله كاملًا وأعطِ Claude تعليمات محددة عمّا تريد استخراجه.</p>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- الأسلوب الأول -->
+    <div class="block" id="b2">
+      <div class="block-header">
+        <div class="block-icon icon-blue">①</div>
+        <h2>التلخيص الهرمي: من الكل إلى التفصيل</h2>
+      </div>
+      <p>الخطأ الشائع هو طلب "لخّص هذا المستند" مباشرة. النتيجة تكون ملخصًا عامًا يفتقر للعمق. بدلًا من ذلك، استخدم التلخيص الهرمي على مراحل:</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">prompt · المرحلة الأولى</span>
+          <span class="code-label">نسخ</span>
+        </div>
+        <div class="code-body"><span class="cm">// اقرأ المستند كاملًا أولًا</span>
+
+<span class="str">"اقرأ هذا المستند بالكامل ثم:
+1. حدد الموضوع الرئيسي في جملة واحدة
+2. استخرج 5 أفكار محورية مرقّمة
+3. لاحظ أي تناقضات أو ثغرات في المنطق"</span></div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">prompt · المرحلة الثانية</span>
+          <span class="code-label">نسخ</span>
+        </div>
+        <div class="code-body"><span class="cm">// بعد الحصول على الأفكار المحورية</span>
+
+<span class="str">"الآن وسّع الفكرة رقم [3] فقط:
+- ما الأدلة التي يقدمها الكاتب؟
+- ما نقاط القوة والضعف في هذه الحجة؟
+- كيف ترتبط بالفكرة رقم [1]؟"</span></div>
+      </div>
+    </div>
+
+    <!-- استخراج النقاط الحرجة -->
+    <div class="block" id="b3">
+      <div class="block-header">
+        <div class="block-icon icon-green">②</div>
+        <h2>استخراج النقاط الحرجة بدقة</h2>
+      </div>
+      <p>النقاط "الحرجة" تختلف حسب نوع الملف. وثيقة قانونية تختلف عن تقرير مالي أو ورقة بحثية. كن محددًا في تعريف ما تريد:</p>
+
+      <div class="tips-grid">
+        <div class="tip-card c-blue">
+          <div class="tip-num">// 01</div>
+          <div class="tip-title">الوثائق القانونية</div>
+          <div class="tip-text">اطلب استخراج الالتزامات، المواعيد، العقوبات، والشروط الاستثنائية تحديدًا.</div>
+        </div>
+        <div class="tip-card c-green">
+          <div class="tip-num">// 02</div>
+          <div class="tip-title">التقارير المالية</div>
+          <div class="tip-text">حدد: الأرقام الرئيسية، التغيرات السنوية، المخاطر المذكورة، والتوقعات المستقبلية.</div>
+        </div>
+        <div class="tip-card c-orange">
+          <div class="tip-num">// 03</div>
+          <div class="tip-title">الأبحاث العلمية</div>
+          <div class="tip-text">اطلب: السؤال البحثي، المنهجية، النتائج الرئيسية، وحدود الدراسة.</div>
+        </div>
+        <div class="tip-card c-purple">
+          <div class="tip-num">// 04</div>
+          <div class="tip-title">اجتماعات العمل</div>
+          <div class="tip-text">استخرج: القرارات المتخذة، المهام الموزعة، المواعيد النهائية، ونقاط الخلاف.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- الحفاظ على السياق -->
+    <div class="block" id="b4">
+      <div class="block-header">
+        <div class="block-icon icon-purple">③</div>
+        <h2>تقنيات الحفاظ على السياق في المحادثة الطويلة</h2>
+      </div>
+      <p>حتى مع نافذة سياق واسعة، قد تمتد محادثتك عبر جلسات متعددة. هذه التقنيات تضمن عدم ضياع السياق:</p>
+
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <strong>ابدأ كل جلسة بـ "خلاصة التحليل السابق"</strong>
+            <span>أطلب من Claude تلخيص ما توصلتما إليه قبل الاستمرار — هذا يُعيد تنشيط السياق بدقة.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <strong>استخدم أرقام الصفحات والأقسام</strong>
+            <span>بدل "ما قيل في المقدمة"، قل "في الصفحة 4، الفقرة الثانية" — دقة المرجع تمنع الخلط.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <strong>أنشئ "خريطة المستند" في البداية</strong>
+            <span>اطلب فهرسًا تحليليًا للملف أولًا. هذا يصبح مرجعك طوال جلسات التحليل.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <strong>استخدم صيغة "بناءً على ما سبق"</strong>
+            <span>ربط كل سؤال بما قبله يجعل Claude يحافظ على الخيط التحليلي بشكل تراكمي.</span>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">05</div>
+          <div class="step-content">
+            <strong>احفظ المخرجات المهمة خارجيًا</strong>
+            <span>انسخ الملخصات والنقاط الحرجة في ملف منفصل — لا تعتمد على ذاكرة المحادثة وحدها.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- البرومبت المتكامل -->
+    <div class="block" id="b5">
+      <div class="block-header">
+        <div class="block-icon icon-orange">⚡</div>
+        <h2>البرومبت المتكامل: نموذج جاهز للاستخدام</h2>
+      </div>
+      <p>هذا البرومبت يجمع كل التقنيات السابقة في قالب واحد يمكنك تخصيصه لأي نوع ملف:</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">master-prompt.txt</span>
+          <span class="code-label">قالب جاهز</span>
+        </div>
+        <div class="code-body"><span class="cm">أنت محلل وثائق خبير. سأزودك بملف [نوع الملف].
+مهمتك:</span>
+
+<span class="kw">المرحلة 1 — الفهرسة:</span>
+<span class="str">اقرأ الملف كاملًا وأنشئ خريطة هيكلية
+تشمل: الأقسام الرئيسية + الموضوع المركزي لكل قسم</span>
+
+<span class="kw">المرحلة 2 — النقاط الحرجة:</span>
+<span class="str">استخرج [العدد] نقاط لا يمكن إغفالها
+مع الإشارة إلى موقعها في الملف (صفحة/قسم)</span>
+
+<span class="kw">المرحلة 3 — التحليل النقدي:</span>
+<span class="str">- ما أقوى الحجج في الملف؟
+- أين تكمن الثغرات أو التناقضات؟
+- ما الذي لم يُذكر ويجب الانتباه إليه؟</span>
+
+<span class="kw">المرحلة 4 — التوصية:</span>
+<span class="str">في 3 أسطر: ما القرار أو الإجراء الذي يوصي به هذا الملف؟</span>
+
+<span class="num">---</span>
+<span class="cm">ابدأ بالمرحلة 1 الآن. سنكمل الباقي تباعًا.</span></div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- الخلاصة -->
+    <div class="conclusion block" id="b6">
+      <h2>الخلاصة</h2>
+      <p class="highlight-text">الأداة قوية، لكن الفرق يصنعه السؤال الصحيح.</p>
+      <p>Claude لا يفقد السياق — لكنه يحتاج توجيهًا واضحًا لما تريد بالضبط. كلما كانت تعليماتك أكثر دقة في تحديد نوع المعلومة ومستوى التفصيل، كلما كانت المخرجات أكثر قيمة وقابلية للتنفيذ.</p>
+      <p>ابدأ دائمًا بالفهرسة، ثم التحليل العام، ثم التعمق في النقاط التي تهمك. هذا المنهج يحول أي وثيقة — مهما طالت — إلى رؤى قابلة للفعل في دقائق.</p>
+    </div>
+
   </main>
+
+  <footer>
+    <span>تحليل الملفات الطويلة · دليل Claude التقني</span>
+    <span>2026 © جميع الحقوق محفوظة</span>
+  </footer>
+
+  <script>
+    const blocks = document.querySelectorAll('.block');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, { threshold: 0.1 });
+    blocks.forEach(b => observer.observe(b));
+  </script>
+
 </body>
 </html>
+
