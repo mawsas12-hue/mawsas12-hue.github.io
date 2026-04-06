@@ -1,39 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/webp" href="logo.webp">
   <title>AI NBEESH | AI Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0a0f;
-      --card: #16161f;
-      --border: rgba(255, 255, 255, 0.08);
+      --bg: #0d1117;
+      --card: rgba(255, 255, 255, 0.01);
+      --border: rgba(255, 255, 255, 0.1);
+      --linear-border: linear-gradient(to bottom right, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
       --text: #f4f6ff;
       --muted: #a0a3b8;
       --primary: #7c3aed;
       --accent: #06b6d4;
       --glow: rgba(124, 58, 237, 0.35);
-      --radius: 18px;
+      --radius: 12px;
       --max: 1200px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: "Roboto", sans-serif;
-      background: radial-gradient(circle at 20% 10%, rgba(124, 58, 237, 0.15), transparent 35%),
-                  radial-gradient(circle at 80% 0%, rgba(6, 182, 212, 0.12), transparent 32%),
-                  var(--bg);
+      font-family: "Inter", "Roboto", sans-serif;
+      background: radial-gradient(circle at center, #161b22 0%, #0d1117 68%);
       color: var(--text);
-      line-height: 1.8;
+      line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+    .bg-orb {
+      position: fixed;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .bg-orb-1 {
+      top: -120px;
+      left: -120px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      filter: blur(80px);
+    }
+    .bg-orb-2 {
+      top: 22%;
+      right: -180px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+      filter: blur(100px);
     }
 
     .container { width: min(100% - 2rem, var(--max)); margin-inline: auto; }
+    h1, h2, h3, h4, h5 {
+      font-family: "Inter", sans-serif;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
 
     .navbar {
       position: fixed;
@@ -43,7 +72,7 @@
       transition: 0.3s ease;
     }
     .navbar.scrolled {
-      background: rgba(10, 10, 15, 0.75);
+      background: rgba(11, 14, 20, 0.62);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -77,12 +106,15 @@
     .nav-icons { display: flex; align-items: center; gap: 0.65rem; }
     .icon-btn {
       width: 38px; height: 38px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      border-radius: 12px;
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
       background: var(--card);
+      backdrop-filter: blur(16px);
       color: #fff;
       cursor: pointer;
       font-size: 1.05rem;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
     .menu-btn { display: none; }
 
@@ -188,9 +220,9 @@
       display: inline-block;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #5b21b6);
+      background: #7c3aed;
       color: #fff;
-      box-shadow: 0 12px 25px rgba(124, 58, 237, 0.35);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.18), inset 0 -1px 2px rgba(0,0,0,0.25);
     }
     .btn-secondary {
       background: rgba(255,255,255,0.03);
@@ -198,15 +230,21 @@
       color: #fff;
     }
     .btn:hover { transform: translateY(-2px); }
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
 
     .stats {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
+      border-radius: 12px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.5rem;
       padding: 1rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
     .stat { text-align: center; }
     .stat strong {
@@ -217,7 +255,16 @@
     }
     .stat span { color: var(--muted); font-size: 0.95rem; }
 
-    .section { padding: 2.8rem 0; }
+    .section {
+      margin-top: 1.3rem;
+      padding: 2.2rem;
+      background: var(--card);
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    }
     .section-title {
       display: flex;
       align-items: center;
@@ -226,29 +273,108 @@
       gap: 1rem;
     }
     .section-title h2 { font-size: clamp(1.4rem, 2.4vw, 2rem); }
+    #featured .section-title h2 { font-weight: 900; }
     .section-title p { color: var(--muted); }
 
     .featured-card {
-      display: grid;
-      grid-template-columns: 1.1fr 1.4fr;
-      gap: 1rem;
       background: var(--card);
-      border: 1px solid var(--border);
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
       border-radius: var(--radius);
       padding: 1rem;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    }
+    .featured-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      min-height: 320px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.16);
     }
     .featured-image {
-      border-radius: 14px;
-      min-height: 260px;
-      background: linear-gradient(140deg, rgba(124,58,237,0.55), rgba(6,182,212,0.45));
-      border: 1px solid rgba(255,255,255,0.16);
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      display: block;
+      transform: scale(1);
+      transition: transform 0.6s ease;
+    }
+    .featured-media:hover .featured-image {
+      transform: scale(1.08);
+    }
+    .featured-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(130deg, rgba(124,58,237,0.5), rgba(59,130,246,0.45));
+      mix-blend-mode: screen;
+      animation: gradientMove 6s ease-in-out infinite alternate;
+    }
+    .featured-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .featured-title-wrap {
+      position: absolute;
+      inset-inline: 1.2rem;
+      bottom: 1.1rem;
+      z-index: 2;
+    }
+    .featured-badge {
+      display: inline-block;
+      margin-bottom: 0.55rem;
+      background: rgba(124,58,237,0.2);
+      color: #ddd6fe;
+      border: 1px solid rgba(167,139,250,0.65);
+      border-radius: 12px;
+      padding: 0.24rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      box-shadow: 0 0 16px rgba(124,58,237,0.6), 0 0 28px rgba(59,130,246,0.35);
+      backdrop-filter: blur(4px);
+    }
+    .featured-overlay-title {
+      margin: 0;
+      font-size: clamp(1.25rem, 2.5vw, 2rem);
+      line-height: 1.25;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, #c4b5fd, #93c5fd, #e9d5ff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.45);
+      min-height: 2.6em;
+    }
+    .featured-overlay-title::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 0.95em;
+      margin-inline-start: 0.22rem;
+      background: rgba(196,181,253,0.9);
+      animation: caretBlink 0.9s step-end infinite;
+      vertical-align: -0.05em;
+    }
+    @keyframes gradientMove {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(18deg); }
     }
     .tag {
       display: inline-block;
       background: rgba(124,58,237,0.16);
       border: 1px solid rgba(124,58,237,0.4);
       color: #c8b5ff;
-      border-radius: 999px;
+      border-radius: 12px;
       padding: 0.2rem 0.7rem;
       font-size: 0.82rem;
       font-weight: 700;
@@ -264,21 +390,24 @@
     }
     .article-card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
+      border-radius: 12px;
       padding: 1rem;
       transition: 0.3s;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
     .article-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 18px 40px var(--glow);
-      border-color: rgba(124,58,237,0.55);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
     .article-card h3 { margin: 0.7rem 0; font-size: 1.1rem; }
     .article-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.7rem; }
     .meta {
-      font-size: 0.86rem;
+      font-size: 0.76rem;
       color: #c6cadf;
+      opacity: 0.6;
       display: flex;
       justify-content: space-between;
       gap: 0.4rem;
@@ -293,8 +422,9 @@
     .popular-nav {
       width: 34px;
       height: 34px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      border-radius: 12px;
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
       background: rgba(255,255,255,0.04);
       color: #fff;
       cursor: pointer;
@@ -305,14 +435,17 @@
       gap: 0.75rem;
     }
     .popular-card {
-      background: #f8fafc;
-      color: #111827;
-      border-radius: 14px;
+      background: var(--card);
+      color: #edf2ff;
+      border-radius: 12px;
       padding: 0.9rem 1rem;
       display: flex;
       align-items: flex-start;
       gap: 0.85rem;
-      border: 1px solid #e5e7eb;
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
     .popular-number {
       min-width: 34px;
@@ -338,7 +471,7 @@
       line-height: 1.5;
     }
     .popular-content p {
-      color: #4b5563;
+      color: #aab6d1;
       font-size: 0.92rem;
       line-height: 1.6;
       margin: 0;
@@ -349,11 +482,14 @@
     }
 
     .newsletter {
-      background: linear-gradient(130deg, rgba(124,58,237,0.28), rgba(6,182,212,0.2));
-      border: 1px solid var(--border);
+      background: var(--card);
+      border: 1px solid transparent;
+      border-image: var(--linear-border) 1;
       border-radius: var(--radius);
       padding: 1.5rem;
       text-align: center;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
     .newsletter p { color: #d6daf0; margin: 0.5rem 0 1rem; }
     .newsletter-form {
@@ -427,18 +563,18 @@
       font-size: 0.92rem;
     }
 
-    .reveal {
+    .reveal { opacity: 1; transform: none; }
+    .js .reveal {
       opacity: 0;
       transform: translateY(24px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .reveal.in-view {
+    .js .reveal.in-view {
       opacity: 1;
       transform: translateY(0);
     }
 
     @media (max-width: 980px) {
-      .featured-card { grid-template-columns: 1fr; }
       .articles-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -450,7 +586,7 @@
         inset-inline: 1rem;
         background: rgba(16,16,24,0.95);
         border: 1px solid var(--border);
-        border-radius: 14px;
+        border-radius: 12px;
         padding: 0.8rem;
         flex-direction: column;
         gap: 0.5rem;
@@ -458,14 +594,52 @@
       .nav-links.show { display: flex; }
       .menu-btn { display: inline-block; }
       .articles-grid, .stats { grid-template-columns: 1fr; }
+      .hero, .section, .featured-card { display: block; visibility: visible; opacity: 1; }
+      .hero { padding: 3rem 0 2rem; }
+      .section { padding: 1.25rem; }
+      .featured-media, .featured-image { min-height: 220px; }
+      .article-card, .featured-card { padding: 0.9rem; }
+      .btn { padding: 0.75rem 1rem; }
       .footer-grid { grid-template-columns: 1fr; }
     }
+  
+    html { scroll-behavior: smooth; }
+  
+    .back-to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border:none;border-radius:12px;background:#7c3aed;color:#fff;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:400;box-shadow:0 8px 20px rgba(0,0,0,.25)}.back-to-top.show{display:flex}@media (max-width:640px){.back-to-top{right:12px;bottom:12px;width:40px;height:40px}}
+
+    @media (max-width: 480px) {
+      .container { width: min(100% - 1rem, var(--max)); }
+      .hero h1 { font-size: clamp(1.6rem, 8.2vw, 2rem); }
+      .hero p, .section-title p, .article-card p { font-size: 0.95rem; }
+      .nav-inner { height: 70px; }
+      .featured-media, .featured-image { min-height: 190px; }
+      .stats { gap: 0.75rem; }
+      .stat strong { font-size: 1.15rem; }
+    }
+  
+    .nav-links a.active { color: #fff; border-bottom: 2px solid var(--accent); padding-bottom: 0.15rem; }
+    .search-panel { margin-top: 1rem; display: none; }
+    .search-panel.show { display: block; }
+    .search-input { width: 100%; padding: 0.75rem 0.95rem; border-radius: 12px; border: 1px solid transparent; border-image: var(--linear-border) 1; background: var(--card); color: #fff; backdrop-filter: blur(16px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);}
+    .article-card.hidden { display: none; }
+
+  
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   </style>
+  <meta name="description" content="An English AI blog that helps you understand modern AI tools and apply them in writing, coding, design, and content creation." />
+  <meta name="keywords" content="ai nbeesh ai blog, ai, artificial intelligence, ai tools, chatbot, automation, productivity" />
+  <meta property="og:title" content="AI NBEESH | AI Blog" />
+  <meta property="og:description" content="An English AI blog that helps you understand modern AI tools and apply them in writing, coding, design, and content creation." />
+  <meta property="og:image" content="https://marounebellouqid.github.io/logo.webp" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://marounebellouqid.github.io/" />
 </head>
 <body id="top">
+  <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a href="#top" class="logo"><img src="logo.webp" alt="AI NBEESH" style="height:45px; width:auto; object-fit:contain;"></a>
+      <a href="#top" class="logo"><img loading="lazy" src="logo.webp" alt="AI NBEESH" style="height:45px; width:auto; object-fit:contain;"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#top">Home</a></li>
         <li><a href="#articles">Articles</a></li>
@@ -478,6 +652,11 @@
       </div>
     </div>
   </header>
+  <div class="container search-panel" id="searchPanel">
+    <label for="articleSearch" class="sr-only">Search articles by title</label>
+    <input id="articleSearch" class="search-input" type="search" placeholder="Search articles by title..." aria-label="Search articles by title">
+  </div>
+
 
   <main>
     <section class="hero container reveal">
@@ -499,16 +678,22 @@
       </div>
     </section>
 
-    <section class="section container reveal">
+    <section class="section container reveal" id="featured">
       <div class="section-title">
         <h2>Featured Article</h2>
         <p>Best pick this week</p>
       </div>
       <article class="featured-card">
-        <img src="https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&auto=format&fit=crop&q=80" alt="Article image" class="featured-image" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        <div class="featured-media">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=800&auto=format&fit=crop&q=80" alt="Article image" class="featured-image">
+          <div class="featured-gradient"></div>
+          <div class="featured-grid"></div>
+          <div class="featured-title-wrap">
+            <span class="featured-badge">AI Tools</span>
+            <h3 class="featured-overlay-title" id="featuredOverlayTitle" data-text="A complete guide to using ChatGPT and Claude for professional content"></h3>
+          </div>
+        </div>
         <div class="featured-content">
-          <span class="tag">AI Tools</span>
-          <h3>A complete guide to using ChatGPT and Claude for professional content</h3>
           <p>Learn practical methods to craft effective prompts, speed up workflow, and turn ideas into publish-ready posts.</p>
           <a href="pages/featured-article.html" class="btn btn-primary">Read More</a>
         </div>
@@ -523,7 +708,7 @@
       <div class="articles-grid">
         <!-- ChatGPT -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='pages/chatgpt-prompts.html'">
-          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80" alt="ChatGPT" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="ChatGPT" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">ChatGPT</span>
           <h3>10 prompts to improve writing quality</h3>
           <p>A compact list for writing marketing and educational copy faster.</p>
@@ -531,7 +716,7 @@
         </article>
         <!-- Claude -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='pages/claude-files.html'">
-          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Claude" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Claude" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Claude</span>
           <h3>Analyze long files without losing context</h3>
           <p>How to use Claude to summarize documents and extract key points.</p>
@@ -539,7 +724,7 @@
         </article>
         <!-- Gemini -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='pages/gemini-google.html'">
-          <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80" alt="Gemini" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80" alt="Gemini" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Gemini</span>
           <h3>Integrate Gemini with Google productivity tools</h3>
           <p>Discover top workflows across Gmail, Docs, and Sheets.</p>
@@ -547,7 +732,7 @@
         </article>
         <!-- Midjourney -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='pages/midjourney-design.html'">
-          <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=800&q=80" alt="Midjourney" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=800&q=80" alt="Midjourney" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Midjourney</span>
           <h3>Create compelling marketing images in minutes</h3>
           <p>Practical steps to write prompts balancing creativity and precision.</p>
@@ -555,7 +740,7 @@
         </article>
         <!-- Copilot -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='pages/copilot-code.html'">
-          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Copilot" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Copilot" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Copilot</span>
           <h3>Speed up coding while keeping quality</h3>
           <p>Tips for developers to use AI suggestions effectively.</p>
@@ -563,11 +748,165 @@
         </article>
         <!-- Sora -->
         <article class="article-card" style="cursor:pointer" onclick="location.href='pages/sora-video.html'">
-          <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=800&q=80" alt="Sora" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=800&q=80" alt="Sora" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
           <span class="tag">Sora</span>
           <h3>From text to video: a practical Sora intro</h3>
           <p>Learn the basics of producing engaging short videos with AI.</p>
           <div class="meta"><span>Marouane Bellouqid</span><span>March 1, 2025</span><span>9 min</span></div>
+        </article>
+
+        <!-- Best AI Writing Tools 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-ai-writing-tools-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&auto=format&fit=crop&q=80" alt="Best AI Writing Tools 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Writing</span>
+          <h3>Best AI Writing Tools 2026</h3>
+          <p>Discover the top AI writing assistants that help you create content faster and smarter in 2026.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Best AI Image Generators 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-ai-image-generators-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&auto=format&fit=crop&q=80" alt="Best AI Image Generators 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Image AI</span>
+          <h3>Best AI Image Generators 2026</h3>
+          <p>A complete roundup of the most powerful AI image generation tools available this year.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Best AI Chatbots 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-ai-chatbots-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80" alt="Best AI Chatbots 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Chatbots</span>
+          <h3>Best AI Chatbots 2026</h3>
+          <p>Compare the leading AI chatbots and find out which one fits your needs best.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Best AI Video Editors 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-ai-video-editors-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=800&auto=format&fit=crop&q=80" alt="Best AI Video Editors 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Video AI</span>
+          <h3>Best AI Video Editors 2026</h3>
+          <p>Explore AI-powered video editing tools that save time and boost production quality.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Best AI Tools for Students 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-ai-tools-for-students-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&auto=format&fit=crop&q=80" alt="Best AI Tools for Students 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Education</span>
+          <h3>Best AI Tools for Students 2026</h3>
+          <p>The best AI tools every student should know to study smarter and get better results.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Best AI Tools for Business 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-ai-tools-for-business-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=80" alt="Best AI Tools for Business 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Business</span>
+          <h3>Best AI Tools for Business 2026</h3>
+          <p>Explore the most powerful AI tools helping businesses automate tasks and grow faster in 2026.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Best AI Productivity Tools 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-ai-productivity-tools-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&auto=format&fit=crop&q=80" alt="Best AI Productivity Tools 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Productivity</span>
+          <h3>Best AI Productivity Tools 2026</h3>
+          <p>Boost your daily output with these top-rated AI productivity tools trusted by professionals.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Best Free AI Tools for Beginners 2026 -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-free-ai-tools-for-beginners-2026.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop&q=80" alt="Best Free AI Tools for Beginners 2026" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Beginners</span>
+          <h3>Best Free AI Tools for Beginners 2026</h3>
+          <p>Just starting with AI? Here are the best free tools to help you learn and create with ease.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Top 10 Free AI Writing Tools -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/top-10-free-ai-writing-tools.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=800&auto=format&fit=crop&q=80" alt="Top 10 Free AI Writing Tools" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Writing</span>
+          <h3>Top 10 Free AI Writing Tools</h3>
+          <p>A curated list of the best free AI writing tools you can start using today, no credit card needed.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Top 10 Free AI Image Tools -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/top-10-free-ai-image-tools.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&auto=format&fit=crop&q=80" alt="Top 10 Free AI Image Tools" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Image AI</span>
+          <h3>Top 10 Free AI Image Tools</h3>
+          <p>Generate stunning visuals for free using these top AI image tools available in 2026.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+
+        <!-- Best Free AI Tools No Signup Required -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/best-free-ai-tools-no-signup.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format&fit=crop&q=80" alt="Best Free AI Tools No Signup Required" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Free Tools</span>
+          <h3>Best Free AI Tools No Signup Required</h3>
+          <p>Use powerful AI tools instantly without creating an account or entering a credit card.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- Free AI Tools That Replace Paid Software -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/free-ai-tools-replace-paid-software.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&auto=format&fit=crop&q=80" alt="Free AI Tools That Replace Paid Software" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Free Tools</span>
+          <h3>Free AI Tools That Replace Paid Software</h3>
+          <p>Why pay for expensive software when these free AI tools can do the same job better?</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- What Is AI Writing? Complete Guide -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/what-is-ai-writing-complete-guide.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=800&auto=format&fit=crop&q=80" alt="What Is AI Writing? Complete Guide" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Guide</span>
+          <h3>What Is AI Writing? Complete Guide</h3>
+          <p>Everything you need to know about AI writing — how it works, best tools, and real use cases.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- What Are AI Image Generators? Complete Guide -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/what-are-ai-image-generators-complete-guide.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=800&auto=format&fit=crop&q=80" alt="What Are AI Image Generators? Complete Guide" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Guide</span>
+          <h3>What Are AI Image Generators? Complete Guide</h3>
+          <p>A beginner-friendly guide to understanding AI image generators and how to get the best results.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- How Do AI Chatbots Work? Complete Guide -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/how-do-ai-chatbots-work-complete-guide.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop&q=80" alt="How Do AI Chatbots Work? Complete Guide" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Guide</span>
+          <h3>How Do AI Chatbots Work? Complete Guide</h3>
+          <p>A clear and simple explanation of how AI chatbots are built and how they understand your messages.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- AI Tools for Beginners: Complete Guide -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/ai-tools-for-beginners-complete-guide.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop&q=80" alt="AI Tools for Beginners: Complete Guide" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Beginners</span>
+          <h3>AI Tools for Beginners: Complete Guide</h3>
+          <p>New to AI? This complete guide walks you through the best tools and how to start using them today.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- How to Use AI Tools at Work: Complete Guide -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/how-to-use-ai-tools-at-work-complete-guide.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80" alt="How to Use AI Tools at Work: Complete Guide" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Business</span>
+          <h3>How to Use AI Tools at Work: Complete Guide</h3>
+          <p>Learn how to integrate AI tools into your daily work routine to save time and improve results.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- New AI Tools Launched This Month -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/new-ai-tools-launched-this-month.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80" alt="New AI Tools Launched This Month" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Trending</span>
+          <h3>New AI Tools Launched This Month</h3>
+          <p>Stay up to date with the latest AI tools released this month — fresh picks you should not miss.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
+        </article>
+        <!-- New AI Writing Tools You Need to Try -->
+        <article class="article-card" style="cursor:pointer" onclick="location.href='pages/new-ai-writing-tools-you-need-to-try.html'">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop&q=80" alt="New AI Writing Tools You Need to Try" style="width:100%; height:140px; border-radius:12px; margin-bottom:12px; object-fit:cover;">
+          <span class="tag">Writing</span>
+          <h3>New AI Writing Tools You Need to Try</h3>
+          <p>Discover the newest AI writing tools making waves in 2026 and how they can upgrade your content.</p>
+          <div class="meta"><span>Marouane Bellouqid</span><span>March 2026</span><span>8 min</span></div>
         </article>
       </div>
     </section>
@@ -660,73 +999,47 @@
     <div class="container copyright">Marouane Bellouqid 2025 ©</div>
   </footer>
 
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
   <script>
-    const navbar = document.getElementById('navbar');
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
-    const newsletterForm = document.getElementById('newsletterForm');
-    const successMsg = document.getElementById('successMsg');
-    const siteName = document.getElementById('siteName');
-    const searchBtn = document.getElementById('searchBtn');
-    const popularPrev = document.getElementById('popularPrev');
-    const popularNext = document.getElementById('popularNext');
-    const popularSection = document.getElementById('popular');
+const navbar=document.getElementById('navbar');
+const menuBtn=document.getElementById('menuBtn');
+const navLinks=document.getElementById('navLinks');
+const newsletterForm=document.getElementById('newsletterForm');
+const successMsg=document.getElementById('successMsg');
+const siteName=document.getElementById('siteName');
+const featuredOverlayTitle=document.getElementById('featuredOverlayTitle');
+const searchBtn=document.getElementById('searchBtn');
+const searchPanel=document.getElementById('searchPanel');
+const articleSearch=document.getElementById('articleSearch');
+const popularPrev=document.getElementById('popularPrev');
+const popularNext=document.getElementById('popularNext');
+const popularSection=document.getElementById('popular');
+const backToTop=document.getElementById('backToTop');
+const navAnchorMap={top:'#top',articles:'#articles',popular:'#popular',about:'#about'};
 
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 8);
-    });
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>8);backToTop?.classList.toggle('show',window.scrollY>320);});
+menuBtn?.addEventListener('click',()=>navLinks.classList.toggle('show'));
+searchBtn?.addEventListener('click',()=>{searchPanel?.classList.toggle('show');if(searchPanel?.classList.contains('show')) articleSearch?.focus();document.getElementById('articles')?.scrollIntoView({behavior:'smooth'});});
+popularPrev?.addEventListener('click',()=>popularSection?.scrollIntoView({behavior:'smooth'}));
+popularNext?.addEventListener('click',()=>popularSection?.scrollIntoView({behavior:'smooth'}));
+backToTop?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-    menuBtn?.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
+articleSearch?.addEventListener('input',()=>{const q=articleSearch.value.trim().toLowerCase();document.querySelectorAll('#articles .article-card').forEach(card=>{const title=(card.querySelector('h3')?.textContent||'').toLowerCase();card.classList.toggle('hidden',q!==''&&!title.includes(q));});});
 
-    searchBtn?.addEventListener('click', () => {
-      document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth' });
-    });
+const runTyping=(el,speed)=>{if(!el)return;const text=el.dataset.text||'';el.textContent='';let i=0;const t=setInterval(()=>{el.textContent=text.slice(0,++i);if(i>=text.length)clearInterval(t);},speed);};
+runTyping(siteName,120);runTyping(featuredOverlayTitle,45);
+newsletterForm?.addEventListener('submit',(e)=>{e.preventDefault();successMsg.classList.remove('show');void successMsg.offsetWidth;successMsg.classList.add('show');newsletterForm.reset();});
 
-    popularPrev?.addEventListener('click', () => {
-      popularSection?.scrollIntoView({ behavior: 'smooth' });
-    });
+if (!('IntersectionObserver' in window)) {
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in-view'));
+} else {
+  const revealObserver=new IntersectionObserver((entries,obs)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in-view');obs.unobserve(entry.target);}});},{threshold:0.05,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+}
 
-    popularNext?.addEventListener('click', () => {
-      popularSection?.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    const runSiteNameTyping = () => {
-      if (!siteName) return;
-      const text = siteName.dataset.text || 'AI Nbeesh';
-      siteName.textContent = '';
-      let idx = 0;
-      const typing = setInterval(() => {
-        siteName.textContent = text.slice(0, idx + 1);
-        idx += 1;
-        if (idx >= text.length) {
-          siteName.textContent = text;
-          clearInterval(typing);
-        }
-      }, 120);
-    };
-
-    runSiteNameTyping();
-
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      successMsg.classList.remove('show');
-      void successMsg.offsetWidth;
-      successMsg.classList.add('show');
-      newsletterForm.reset();
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-  </script>
+const sectionObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const id=entry.target.id;const href=navAnchorMap[id];if(!href)return;document.querySelectorAll('#navLinks a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===href));});},{threshold:.45});
+['top','articles','popular','about'].forEach(id=>{const el=document.getElementById(id);if(el)sectionObserver.observe(el);});
+</script>
 </body>
 </html>
